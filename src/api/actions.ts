@@ -25,16 +25,16 @@ export const apiError = (error: string) => ({
 export const apiAction = ({
     apiEndpoint,
     data = null,
-    onSuccess,
-    onFailure,
+    onSuccessAction,
+    onFailureAction,
     label = "",
 }: ApiActionPayload): ApiAction => ({
     type: API,
     payload: {
       apiEndpoint, 
       data, 
-      onSuccess,
-      onFailure,
+      onSuccessAction,
+      onFailureAction,
       label
     }
 });

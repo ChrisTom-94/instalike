@@ -8,4 +8,9 @@ const isAuthSelector = createSelector(
   (state) => state.isAuth
 );
 
-export default isAuthSelector
+const authErrorSelector = createSelector(
+  [authSelector],
+  (state) => state.error
+)
+
+export {isAuthSelector, authErrorSelector}

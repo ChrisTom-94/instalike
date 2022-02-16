@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { LoginFailureAction, LoginSuccessAction, LogoutAction, LogoutSuccessAction, RefreshTokenAction } from './actionsType';
+import { LoginFailureAction, LoginSuccessAction, LogoutAction } from './actionsType';
 import AuthActions from './enum';
 import { AuthState } from "./types";
 
@@ -14,8 +14,6 @@ export type AuthAction =
   | LoginSuccessAction
   | LoginFailureAction
   | LogoutAction
-  | LogoutSuccessAction
-  | RefreshTokenAction
 
 const authReducer: Reducer<AuthState, AuthAction> = (
     state = authInitialState,
@@ -28,11 +26,8 @@ const authReducer: Reducer<AuthState, AuthAction> = (
             case AuthActions.AUTH_LOGIN_FAILURE:
                 return {...state, isAuth: true, error: action.error}
             
-            case AuthActions.AUTH_LOGOUT_SUCCESS:
+            case AuthActions.AUTH_LOGOUT:
                 return {...state, isAuth: false}
-
-            case AuthActions.AUTH_REFRESH_TOKEN: 
-                return {...state, authenticatedAt: new Date().toDateString()}
 
             default:
                 return state
