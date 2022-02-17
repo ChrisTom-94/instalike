@@ -5,14 +5,14 @@ import {
   UpdateProfileAction,
   UpdateAvatarAction,
   DeleteAvatarAction,
-  GetFollowSuggestions,
-  GetFollowing,
-  AddFollowing,
-  RemoveFollowing,
-  GetNotifications,
-  ReadNotification,
-  UnreadNotification,
-  MarkAllNotificationsAsRead,
+  GetFollowSuggestionsAction,
+  GetFollowingAction,
+  AddFollowingAction,
+  DeleteFollowingAction,
+  GetNotificationsAction,
+  UpdateAllNotificationsAsReadAction,
+  UpdateNotificationAsReadAction,
+  UpdateNotificationAsUnreadAction,
 } from "./actionsType";
 import UserActions from "./enum";
 
@@ -29,14 +29,14 @@ export type UserAction =
   | UpdateProfileAction
   | UpdateAvatarAction
   | DeleteAvatarAction
-  | GetFollowSuggestions
-  | GetFollowing
-  | AddFollowing
-  | RemoveFollowing
-  | GetNotifications
-  | MarkAllNotificationsAsRead
-  | ReadNotification
-  | UnreadNotification;
+  | GetFollowSuggestionsAction
+  | GetFollowingAction
+  | AddFollowingAction
+  | DeleteFollowingAction
+  | GetNotificationsAction
+  | UpdateAllNotificationsAsReadAction
+  | UpdateNotificationAsReadAction
+  | UpdateNotificationAsUnreadAction;
 
 const userReducer: Reducer<UserState, UserAction> = (
   state = userInitialState,
@@ -64,17 +64,17 @@ const userReducer: Reducer<UserState, UserAction> = (
     case UserActions.ADD_FOLLOWING:
       return { ...state, following: [...state.following, action.payload] };
 
-    case UserActions.REMOVE_FOLLOWING:
-      return { ...state, following: state.following.filter((follower) => follower.id !== action.payload.id)};
+    case UserActions.DELETE_FOLLOWING:
+      return { ...state, following: state.following.filter((follower) => follower.id !== action.payload)};
 
     case UserActions.GET_NOTIFICATIONS:
       return { ...state, notifications: action.payload };
 
-    case UserActions.MARK_ALL_NOTIFICATIONS_AS_READ:
+    case UserActions.UPDATE_ALL_NOTIFICATIONS_AS_READ:
       return {...state, notifications: state.notifications.map((notif) => ({ ...notif, isRead: true,})),
       };
 
-    case UserActions.READ_NOTIFICATION:
+    case UserActions.UPDATE_NOTIFICATION_AS_READ:
       return {
         ...state,
         notifications: state.notifications.map((notif) =>
@@ -82,7 +82,7 @@ const userReducer: Reducer<UserState, UserAction> = (
         ),
       };
 
-    case UserActions.UNREAD_NOTIFICATION:
+    case UserActions.UPDATE_NOTIFICATION_AS_UNREAD:
       return {
         ...state,
         notifications: state.notifications.map((notif) =>

@@ -17,8 +17,8 @@ export const loginFailed = (error: string): AnyAction => ({
 export const tryLogin = (credentials: ApiCredentials): ApiAction => apiAction({
     apiEndpoint: apiClient.auth.login,
     data: credentials,
-    onSuccessAction: loginSuccess,
-    onFailureAction: loginFailed, 
+    onSuccess: loginSuccess,
+    onFailure: loginFailed, 
     label: AuthActions.AUTH_LOGIN_SUCCESS
 })
 
@@ -30,8 +30,8 @@ export const logoutSuccess = (): AnyAction => ({
 export const logout = (credentials: ApiCredentials): ApiAction => apiAction({
     apiEndpoint: apiClient.auth.logout,
     data: credentials,
-    onSuccessAction: logoutSuccess,
-    onFailureAction: null, 
+    onSuccess: logoutSuccess,
+    onFailure: null, 
     label: AuthActions.AUTH_LOGIN_SUCCESS
 })
 

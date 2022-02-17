@@ -1,3 +1,4 @@
+import { ResourceID } from 'api/types';
 import { Action } from "redux";
 import UserActions from "./enum";
 
@@ -17,37 +18,37 @@ export interface DeleteAvatarAction extends Action<typeof UserActions.DELETE_AVA
   payload: undefined;
 }
 
-export interface GetFollowSuggestions
+export interface GetFollowSuggestionsAction
   extends Action<typeof UserActions.GET_FOLLOW_SUGGESTIONS> {
-  payload: Instalike.User[];
+  payload: Instalike.UserPreview[];
 }
 
-export interface GetFollowing extends Action<typeof UserActions.GET_FOLLOWING> {
-  payload: Instalike.User[];
+export interface GetFollowingAction extends Action<typeof UserActions.GET_FOLLOWING> {
+  payload: Instalike.UserPreview[];
 }
 
-export interface AddFollowing extends Action<typeof UserActions.ADD_FOLLOWING> {
-  payload: Instalike.User;
+export interface AddFollowingAction extends Action<typeof UserActions.ADD_FOLLOWING> {
+  payload: Instalike.UserPreview;
 }
 
-export interface RemoveFollowing extends Action<typeof UserActions.REMOVE_FOLLOWING> {
-  payload: Instalike.User;
+export interface DeleteFollowingAction extends Action<typeof UserActions.DELETE_FOLLOWING> {
+  payload: ResourceID;
 }
 
-export interface GetNotifications extends Action<typeof UserActions.GET_NOTIFICATIONS> {
+export interface GetNotificationsAction extends Action<typeof UserActions.GET_NOTIFICATIONS> {
   payload: Instalike.Notification[];
 }
 
-export interface MarkAllNotificationsAsRead
-  extends Action<typeof UserActions.MARK_ALL_NOTIFICATIONS_AS_READ> {
+export interface UpdateAllNotificationsAsReadAction
+  extends Action<typeof UserActions.UPDATE_ALL_NOTIFICATIONS_AS_READ> {
   payload: undefined;
 }
 
-export interface ReadNotification extends Action<typeof UserActions.READ_NOTIFICATION> {
+export interface UpdateNotificationAsReadAction extends Action<typeof UserActions.UPDATE_NOTIFICATION_AS_READ> {
   payload: Instalike.Notification;
 }
 
-export interface UnreadNotification
-  extends Action<typeof UserActions.UNREAD_NOTIFICATION> {
+export interface UpdateNotificationAsUnreadAction
+  extends Action<typeof UserActions.UPDATE_NOTIFICATION_AS_UNREAD> {
   payload: Instalike.Notification;
 }

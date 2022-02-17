@@ -9,7 +9,7 @@ export const apiMiddleware: Middleware<{}, RootState> = store => next => async a
   next(action);
   if (action.type !== API) return;
 
-  const { apiEndpoint, data, onSuccessAction, onFailureAction, label } = action.payload as ApiActionPayload;
+  const { apiEndpoint, data, label, onSuccess, onFailure, } = action.payload as ApiActionPayload;
 
   if (label) {
     store.dispatch(apiStart(label));
@@ -18,10 +18,10 @@ export const apiMiddleware: Middleware<{}, RootState> = store => next => async a
   try {
     const response = (data ? await apiEndpoint(data) : await apiEndpoint()) as AxiosResponse
     store.dispatch({type: label, payload: response.data ?? undefined});
-    if(onSuccessAction) store.dispatch(onSuccessAction(undefined))
+    if(onSuccess) store.dispatch(onSuccess(undefined))
   } catch (error: any) {
     store.dispatch(apiError(error));
-    if(onFailureAction) store.dispatch(onFailureAction(error))
+    if(onFailure) store.dispatch(onFailure(error))
     if(shouldIntercept(error)){
       deleteToken()
       accessDenied(window.location.pathname)

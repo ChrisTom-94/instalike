@@ -1,7 +1,7 @@
 export type UserState = {
   data: Instalike.User;
-  followSuggestions: Instalike.User[];
-  following: Instalike.User[];
+  followSuggestions: Instalike.UserPreview[];
+  following: Instalike.UserPreview[];
   notifications: Instalike.Notification[];
   error: string | null;
 };
