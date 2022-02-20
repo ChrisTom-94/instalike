@@ -5,7 +5,7 @@ import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { authErrorSelector } from "redux/auth/selectors";
-import { tryLogin, loginFailed } from "redux/auth/thunks";
+import { loginRequest, loginFailed } from "redux/auth/thunks";
 
 const authForm: ApiCredentials = {
   email: "",
@@ -24,7 +24,7 @@ export default function Auth() {
   const submit = async (e: any) => {
     e.preventDefault()
     try{
-      await dispatch(tryLogin(credentials))
+      await dispatch(loginRequest(credentials))
       navigate("/feed")
     }catch(ev: any){
       dispatch(loginFailed(ev.message))

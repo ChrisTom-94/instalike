@@ -7,14 +7,11 @@ import RequireAuth from "components/routes/RequireAuth";
 
 function App() {
   return (
-    <>
-      <div className="p-4 text-center">InstaLike</div>
       <Routes>
         <Route path="/auth" element={<Auth />} />
         <Route path="/feed" element={<RequireAuth><Feed /></RequireAuth>} />
         <Route index element={<Home />} />
       </Routes>
-    </>
   );
 }
 

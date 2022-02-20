@@ -14,24 +14,37 @@ export const loginFailed = (errors: ApiCredentials): AnyAction => ({
     errors
 })
 
-export const tryLogin = (credentials: ApiCredentials): ApiAction => apiAction({
+export const loginRequest = (credentials: ApiCredentials): ApiAction => apiAction({
     apiEndpoint: apiClient.auth.login,
     data: credentials,
     onSuccess: loginSuccess,
     onFailure: loginFailed, 
-    label: AuthActions.AUTH_LOGIN
+    label: AuthActions.AUTH_LOGIN_REQUEST
 })
 
 export const logoutSuccess = (): AnyAction => ({
-    type: AuthActions.AUTH_LOGOUT,
+    type: AuthActions.AUTH_LOGOUT_SUCCESS,
     payload: undefined
 })
 
-export const logout = (credentials: ApiCredentials): ApiAction => apiAction({
-    apiEndpoint: apiClient.auth.logout,
-    data: credentials,
-    onSuccess: logoutSuccess,
-    onFailure: null, 
-    label: AuthActions.AUTH_LOGIN_SUCCESS
+export const logoutFailed = (): AnyAction => ({
+    type: AuthActions.AUTH_LOGOUT_FAILURE,
+    payload: undefined
 })
+
+export const logoutRequest = (): ApiAction => apiAction({
+    apiEndpoint: apiClient.auth.logout,
+    data: null,
+    onSuccess: logoutSuccess,
+    onFailure: logoutFailed, 
+    label: AuthActions.AUTH_LOGOUT_REQUEST
+})
+
+// export const logout = (credentials: ApiCredentials): ApiAction => apiAction({
+//     apiEndpoint: apiClient.auth.logout,
+//     data: credentials,
+//     onSuccess: logoutSuccess,
+//     onFailure: null, 
+//     label: AuthActions.AUTH_LOGIN_SUCCESS
+// })
 

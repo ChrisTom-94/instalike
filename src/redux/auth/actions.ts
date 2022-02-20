@@ -1,11 +1,6 @@
 import { ApiCredentialsErrors } from 'api/types';
-import { LoginAction, LoginFailureAction, LoginSuccessAction, LogoutAction } from "./actionsType"
+import { LoginFailureAction, LoginSuccessAction, LogoutSuccessAction, LogoutFailureAction } from "./actionsType"
 import AuthActions from "./enum"
-
-export const login = (): LoginAction => ({
-    type: AuthActions.AUTH_LOGIN,
-    payload: undefined
-})
 
 export const loginSucces = (): LoginSuccessAction => ({
     type: AuthActions.AUTH_LOGIN_SUCCESS,
@@ -17,7 +12,13 @@ export const loginFailed = (errors: ApiCredentialsErrors): LoginFailureAction =>
     errors
 })
 
-export const logout = (): LogoutAction => ({
-    type: AuthActions.AUTH_LOGOUT,
-    payload: undefined
+export const logoutSuccess = (message: string): LogoutSuccessAction => ({
+    type: AuthActions.AUTH_LOGOUT_SUCCESS,
+    message
 })
+
+export const logoutFailure = (errors: ApiCredentialsErrors): LogoutFailureAction=> ({
+    type: AuthActions.AUTH_LOGOUT_FAILURE,
+    errors
+})
+

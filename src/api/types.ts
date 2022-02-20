@@ -91,8 +91,8 @@ export type ApiClientEndpoint = keyof ApiClientPostEndpoints | keyof ApiClientUs
 export type ApiActionPayload = {
   apiEndpoint: any,
   data: {} | null,
-  onSuccess: (() => AnyAction) | ((data: any) => AnyAction) | null,
-  onFailure: (() => AnyAction) | ((error: any) => AnyAction) | null,
+  onSuccess: (() => AnyAction) | ((data: any) => AnyAction),
+  onFailure: (() => AnyAction) | ((error: any) => AnyAction),
   label: string,
 }
 
