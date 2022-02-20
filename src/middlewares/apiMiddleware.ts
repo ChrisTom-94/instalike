@@ -1,9 +1,9 @@
-import { AxiosResponse } from 'axios';
+import { AxiosResponse, AxiosError } from 'axios';
 import { Middleware } from "redux";
-import { deleteToken, shouldIntercept, shouldRefreshToken } from 'utils/helpers';
-import { apiStart, apiEnd, apiError, accessDenied } from "api/actions";
+import { saveToken, deleteToken, shouldIntercept, shouldRefreshToken } from 'utils/helpers';
 import { API, ApiActionPayload } from "api/types";
 import type {RootState} from "redux/store";
+import AuthActions from 'redux/auth/enum';
 
 export const apiMiddleware: Middleware<{}, RootState> = store => next => async action => {
   next(action);
@@ -11,30 +11,21 @@ export const apiMiddleware: Middleware<{}, RootState> = store => next => async a
 
   const { apiEndpoint, data, label, onSuccess, onFailure, } = action.payload as ApiActionPayload;
 
-  if (label) {
-    store.dispatch(apiStart(label));
-  }
+  let response;
 
   try {
-    const response = (data ? await apiEndpoint(data) : await apiEndpoint()) as AxiosResponse
+    response = (data ? await apiEndpoint(data) : await apiEndpoint()) as AxiosResponse
     store.dispatch({type: label, payload: response.data ?? undefined});
+    if(label === AuthActions.AUTH_LOGIN) saveToken(response.data)
     if(onSuccess) store.dispatch(onSuccess(undefined))
-  } catch (error: any) {
-    store.dispatch(apiError(error));
-    if(onFailure) store.dispatch(onFailure(error))
-    if(shouldIntercept(error)){
-      deleteToken()
-      accessDenied(window.location.pathname)
-    }
-    if(shouldRefreshToken(error)) {
-      // store.dispatch(refreshToken())
-      next(action)
-    }
-  } finally{
-    if (label) {
-      store.dispatch(apiEnd(label));
-    }
-  }
+  } catch (e: any) {
+    const error = e as AxiosError
+    console.log(error.response?.data)
+    if(onFailure) store.dispatch(onFailure(error.response?.data?.errors ?? {message: error.response?.data?.message}))
+    if(shouldIntercept(error)) deleteToken()
+    if(shouldRefreshToken(error)) {console.log("ok")}
+    next(action)
+  } 
 }
 
 export default apiMiddleware;

@@ -1,6 +1,6 @@
 import { ApiAction } from 'api/types';
 import apiClient from 'api/api';
-import { apiAction } from 'api/actions';
+import apiAction from 'api/actions';
 import UserActions from './enum';
 import { UserRequiredFields } from './types';
 

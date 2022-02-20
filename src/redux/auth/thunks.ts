@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { apiAction } from "api/actions";
+import apiAction from "api/actions";
 import { ApiAction, ApiCredentials } from "api/types";
 import apiClient from "api/api";
 import AuthActions from './enum';
@@ -9,9 +9,9 @@ export const loginSuccess = (): AnyAction => ({
     payload: undefined
 })
 
-export const loginFailed = (error: string): AnyAction => ({
+export const loginFailed = (errors: ApiCredentials): AnyAction => ({
     type: AuthActions.AUTH_LOGIN_FAILURE,
-    error
+    errors
 })
 
 export const tryLogin = (credentials: ApiCredentials): ApiAction => apiAction({
@@ -19,7 +19,7 @@ export const tryLogin = (credentials: ApiCredentials): ApiAction => apiAction({
     data: credentials,
     onSuccess: loginSuccess,
     onFailure: loginFailed, 
-    label: AuthActions.AUTH_LOGIN_SUCCESS
+    label: AuthActions.AUTH_LOGIN
 })
 
 export const logoutSuccess = (): AnyAction => ({

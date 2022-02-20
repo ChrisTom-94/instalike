@@ -17,6 +17,7 @@ export type ApiClient = {
 };
 
 export type ApiCredentials = { email: string; password: string };
+export type ApiCredentialsErrors = Partial<ApiCredentials> & {message?: string}
 export type ApiPromiseResponse<T> = Promise<AxiosResponse<T>>;
 export type ResourceID = number | string;
 

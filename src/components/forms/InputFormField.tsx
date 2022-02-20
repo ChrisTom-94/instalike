@@ -5,13 +5,15 @@ const InputFormField = ({
   name,
   value,
   onChange,
-  isRequired = false
+  isRequired = false,
+  error = undefined
 }: {
   type: string,
   name: string,
   value: string,
   onChange: (key: string, value: string) => void,
-  isRequired: boolean
+  isRequired: boolean,
+  error: string | undefined
 }) => (
     <div>
         <label className="flex flex-col gap-2" htmlFor={name}>
@@ -26,6 +28,8 @@ const InputFormField = ({
             type={type}
         />
         </label>
+        {console.log(error)}
+        {error && <p>{error}</p>}
   </div>
 );
 

@@ -3,14 +3,12 @@ import type { RootState } from "../store";
 
 const authSelector = (state: RootState) => state.auth
 
-const isAuthSelector = createSelector(
+export const isAuthSelector = createSelector(
   [authSelector],
   (state) => state.isAuth
 );
 
-const authErrorSelector = createSelector(
+export const authErrorSelector = createSelector(
   [authSelector],
-  (state) => state.error
+  (state) => state.errors
 )
-
-export {isAuthSelector, authErrorSelector}

@@ -15,7 +15,6 @@ const pusherOptions: Options = {
   },
 };
 
-// REACT_APP_PUSHER_KEY = 1cc1df3f6bd5c6f5e81a
 const PUSHER_KEY = process.env.REACT_APP_PUSHER_KEY as string;
 
 const client = new Pusher(PUSHER_KEY, pusherOptions);
@@ -26,14 +25,6 @@ export const channel = new Echo({
   forceTLS: false,
   client,
 });
-
-// subscribe to channel
-channel.private("App.User.YOUR_ID").notification((notification: any) => {
-  console.log(notification);
-  // do what do you want with notification
-});
-
-// import {channel} from "./socket";
 
 // channel.private("App.User.21905790")
 // .notification((notification: any) => {

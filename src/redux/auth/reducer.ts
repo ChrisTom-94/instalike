@@ -7,7 +7,7 @@ import { AuthState } from "./types";
 export const authInitialState: AuthState = {
     isAuth: false,
     authenticatedAt: null,
-    error: null
+    errors: null
 };
 
 export type AuthAction =
@@ -21,13 +21,13 @@ const authReducer: Reducer<AuthState, AuthAction> = (
   ) => { 
       switch(action.type){
             case AuthActions.AUTH_LOGIN_SUCCESS:
-                return {...state, isAuth: true}
+                return {...state, isAuth: true, errors: null}
 
             case AuthActions.AUTH_LOGIN_FAILURE:
-                return {...state, isAuth: true, error: action.error}
+                return {...state, isAuth: false, errors: action.errors}
             
             case AuthActions.AUTH_LOGOUT:
-                return {...state, isAuth: false}
+                return authInitialState
 
             default:
                 return state
