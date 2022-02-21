@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputFormField = ({
+const InputForm = ({
   type,
   name,
   value,
@@ -28,9 +28,8 @@ const InputFormField = ({
             type={type}
         />
         </label>
-        {console.log(error)}
         {error && <p>{error}</p>}
   </div>
 );
 
-export default InputFormField;
+export default InputForm;

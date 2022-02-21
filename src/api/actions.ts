@@ -5,7 +5,7 @@ const apiAction = ({
     data = null,
     onSuccess,
     onFailure,
-    label = "",
+    label
 }: ApiActionPayload): ApiAction => ({
     type: API,
     payload: {

@@ -93,7 +93,7 @@ export type ApiActionPayload = {
   data: {} | null,
   onSuccess: (() => AnyAction) | ((data: any) => AnyAction),
   onFailure: (() => AnyAction) | ((error: any) => AnyAction),
-  label: string,
+  label: string
 }
 
 export interface ApiAction extends AnyAction {
