@@ -6,7 +6,7 @@ import {isAuthSelector} from "redux/auth/selectors";
 const RequireAuth = ({ children }: {children: ReactElement}): ReactElement => {
     const isAuth = useSelector(isAuthSelector);
   
-    return isAuth ? children : <Navigate to="/auth" replace />;
+    return isAuth ? children : <Navigate to="/login" replace />;
 }
 
 export default RequireAuth

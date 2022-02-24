@@ -1,11 +1,6 @@
 import { createSelector } from "reselect";
 import type { RootState } from "../store";
 
-type UserPreviewWithourResourceType = Omit<
-  Instalike.UserPreview,
-  "resourceType"
->;
-
 export const userSelector = (state: RootState) => state.user;
 
 export const userProfileSelector = createSelector(
@@ -15,10 +10,27 @@ export const userProfileSelector = createSelector(
 
 export const userProfilePreviewSelector = createSelector(
   [userSelector],
-  (state): UserPreviewWithourResourceType => ({
+  (state): Instalike.UserPreview => ({
+    resourceType: state.data.resourceType,
     id: state.data.id,
     avatar: state.data.avatar,
     userName: state.data.userName,
     isViewer: state.data.isViewer,
   })
 );
+
+export const countNotificationsSelector = createSelector(
+  [userSelector],
+  (state) => state.notifications.length
+);
+
+export const notificationsSelector = createSelector(
+  [userSelector],
+  (state) => state.notifications
+);
+
+export const countNotificationsToReadSelector = createSelector(
+  [userSelector],
+  (state) => state.notifications
+);
+

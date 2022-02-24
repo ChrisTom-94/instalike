@@ -14,7 +14,7 @@ const apiClient: ApiClient = {
   auth: {
     login: (credentials) => apiClient.api.post("/auth/login", credentials),
 
-    logout: () => apiClient.api.post("/auth/logut"),
+    logout: () => apiClient.api.post("/auth/logout"),
 
     refreshToken: () => apiClient.api.post("/auth/refresh"),
   },

@@ -3,9 +3,10 @@ import InputForm from "components/forms/InputForm";
 import SubmitForm from "components/forms/SubmitForm";
 import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { authErrorSelector } from "redux/auth/selectors";
 import { loginRequest } from "redux/auth/thunks";
+import { getProfileRequest } from "redux/user/thunks";
 
 const authForm: ApiCredentials = {
   email: "",
@@ -22,16 +23,16 @@ export default function Auth() {
     setCredentials((creds) => ({ ...creds, [key]: value })
   )},[]);
 
-  const submit = async (e: any) => {
+  const submit = useCallback(async (e: any) => {
     e.preventDefault();
     await dispatch(loginRequest(credentials));
+    await dispatch(getProfileRequest());
     navigate("/feed");
-  };
+  }, [credentials, dispatch, navigate]);
 
   return (
     <>
       <h1 className="capitalize text-4xl">Login</h1>
-      <Link to="/">Home</Link>
       {errors?.message && <p>{errors?.message}</p>}
       <form onSubmit={submit}>
         <InputForm

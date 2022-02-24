@@ -2,7 +2,11 @@ import { ResourceID } from 'api/types';
 import { Action } from "redux";
 import UserActions from "./enum";
 
-export interface GetProfileAction extends Action<typeof UserActions.GET_PROFILE> {
+export interface UserRequestErrorAction extends Action<typeof UserActions.USER_REQUEST_ERROR> {
+  errors: any;
+}
+
+export interface GetProfileSuccessAction extends Action<typeof UserActions.GET_PROFILE_SUCCESS> {
   payload: Instalike.User;
 }
 
@@ -35,20 +39,15 @@ export interface DeleteFollowingAction extends Action<typeof UserActions.DELETE_
   payload: ResourceID;
 }
 
-export interface GetNotificationsAction extends Action<typeof UserActions.GET_NOTIFICATIONS> {
+export interface GetNotificationsSuccessAction extends Action<typeof UserActions.GET_NOTIFICATIONS_SUCCESS> {
   payload: Instalike.Notification[];
 }
 
-export interface UpdateAllNotificationsAsReadAction
-  extends Action<typeof UserActions.UPDATE_ALL_NOTIFICATIONS_AS_READ> {
-  payload: undefined;
+export interface MarkNotificationAsReadSuccessAction extends Action<typeof UserActions.MARK_NOTIFICATION_AS_READ_SUCCESS> {
+  payload: ResourceID;
 }
 
-export interface UpdateNotificationAsReadAction extends Action<typeof UserActions.UPDATE_NOTIFICATION_AS_READ> {
-  payload: Instalike.Notification;
-}
-
-export interface UpdateNotificationAsUnreadAction
-  extends Action<typeof UserActions.UPDATE_NOTIFICATION_AS_UNREAD> {
-  payload: Instalike.Notification;
+export interface MarkNotificationAsUnreadSuccessAction
+  extends Action<typeof UserActions.MARK_NOTIFICATION_AS_UNREAD_SUCCESS> {
+  payload: ResourceID;
 }

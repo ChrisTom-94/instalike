@@ -1,7 +1,8 @@
 import { Reducer } from "redux";
 import { UserState } from "./types";
 import {
-  GetProfileAction,
+  UserRequestErrorAction,
+  GetProfileSuccessAction,
   UpdateProfileAction,
   UpdateAvatarAction,
   DeleteAvatarAction,
@@ -9,23 +10,23 @@ import {
   GetFollowingAction,
   AddFollowingAction,
   DeleteFollowingAction,
-  GetNotificationsAction,
-  UpdateAllNotificationsAsReadAction,
-  UpdateNotificationAsReadAction,
-  UpdateNotificationAsUnreadAction,
+  GetNotificationsSuccessAction,
+  MarkNotificationAsReadSuccessAction,
+  MarkNotificationAsUnreadSuccessAction,
 } from "./actionsType";
 import UserActions from "./enum";
 
 export const userInitialState: UserState = {
   data: {} as Instalike.User,
-  error: null,
+  errors: null,
   followSuggestions: [],
   following: [],
   notifications: [],
 };
 
 export type UserAction =
-  | GetProfileAction
+    UserRequestErrorAction  
+  | GetProfileSuccessAction
   | UpdateProfileAction
   | UpdateAvatarAction
   | DeleteAvatarAction
@@ -33,18 +34,20 @@ export type UserAction =
   | GetFollowingAction
   | AddFollowingAction
   | DeleteFollowingAction
-  | GetNotificationsAction
-  | UpdateAllNotificationsAsReadAction
-  | UpdateNotificationAsReadAction
-  | UpdateNotificationAsUnreadAction;
+  | GetNotificationsSuccessAction
+  | MarkNotificationAsReadSuccessAction
+  | MarkNotificationAsUnreadSuccessAction;
 
 const userReducer: Reducer<UserState, UserAction> = (
   state = userInitialState,
   action
 ) => {
   switch (action.type) {
-    case UserActions.GET_PROFILE:
-      return { ...state, data: action.payload };
+    case UserActions.USER_REQUEST_ERROR:
+      return { ...state, errors: action.errors };
+
+    case UserActions.GET_PROFILE_SUCCESS:
+      return { ...state, data: action.payload, errors: null };
 
     case UserActions.UPDATE_PROFILE:
       return { ...state, data: action.payload };
@@ -67,26 +70,22 @@ const userReducer: Reducer<UserState, UserAction> = (
     case UserActions.DELETE_FOLLOWING:
       return { ...state, following: state.following.filter((follower) => follower.id !== action.payload)};
 
-    case UserActions.GET_NOTIFICATIONS:
-      return { ...state, notifications: action.payload };
+    case UserActions.GET_NOTIFICATIONS_SUCCESS:
+      return { ...state, notifications: action.payload, errors: null };
 
-    case UserActions.UPDATE_ALL_NOTIFICATIONS_AS_READ:
-      return {...state, notifications: state.notifications.map((notif) => ({ ...notif, isRead: true,})),
-      };
-
-    case UserActions.UPDATE_NOTIFICATION_AS_READ:
+    case UserActions.MARK_NOTIFICATION_AS_READ_SUCCESS:
       return {
         ...state,
         notifications: state.notifications.map((notif) =>
-          notif.id === action.payload.id ? { ...notif, isRead: true } : notif
+          notif.id === action.payload ? { ...notif, isRead: true } : notif
         ),
       };
 
-    case UserActions.UPDATE_NOTIFICATION_AS_UNREAD:
+    case UserActions.MARK_NOTIFICATION_AS_UNREAD_SUCCESS:
       return {
         ...state,
         notifications: state.notifications.map((notif) =>
-          notif.id === action.payload.id ? { ...notif, isRead: false } : notif
+          notif.id === action.payload ? { ...notif, isRead: false } : notif
         ),
       };
 

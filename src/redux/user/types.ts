@@ -3,7 +3,7 @@ export type UserState = {
   followSuggestions: Instalike.UserPreview[];
   following: Instalike.UserPreview[];
   notifications: Instalike.Notification[];
-  error: string | null;
+  errors: object | string | null;
 };
 
 export type UserRequiredFields = Pick<

@@ -1,10 +1,22 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
 import Auth from "pages/Auth"
-import authReducer, { authInitialState } from "redux/auth/reducer";
 import StoreMock from "./utils/StoreMock";
-import { rootReducer } from "redux/store";
 
+
+jest.mock('react-router-dom', () => {
+    // Require the original module to not be mocked...
+    const originalModule = jest.requireActual('react-router-dom');
+  
+    return {
+      __esModule: true,
+      ...originalModule,
+      // add your noops here
+      useParams: jest.fn(),
+      useNavigate: jest.fn(),
+      useHistory: jest.fn(),
+    };
+});
 
 
 describe("AUTH", () => {

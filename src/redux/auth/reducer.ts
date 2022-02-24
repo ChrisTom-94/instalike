@@ -1,3 +1,4 @@
+import { checkIfTokenExist } from 'utils/helpers';
 import { Reducer } from "redux";
 import {
   LoginFailureAction,
@@ -14,7 +15,7 @@ import AuthActions from "./enum";
 import { AuthState } from "./types";
 
 export const authInitialState: AuthState = {
-  isAuth: false,
+  isAuth: checkIfTokenExist(),
   errors: null,
   isLoading: false,
 };
@@ -48,7 +49,7 @@ const authReducer: Reducer<AuthState, AuthAction> = (
       return { ...state, errors: null, isLoading: true };
 
     case AuthActions.AUTH_LOGOUT_SUCCESS:
-      return authInitialState;
+      return {...authInitialState, isAuth: false};
 
     case AuthActions.AUTH_LOGOUT_FAILURE:
       return { ...state, errors: action.errors, isLoading: false };

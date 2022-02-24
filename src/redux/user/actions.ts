@@ -1,30 +1,35 @@
 import { ResourceID } from 'api/types';
 import { 
-    DeleteAvatarAction, 
-    GetProfileAction, 
+    UserRequestErrorAction,
+    GetProfileSuccessAction, 
     UpdateAvatarAction, 
+    DeleteAvatarAction, 
     UpdateProfileAction, 
     GetFollowSuggestionsAction, 
     AddFollowingAction, 
     DeleteFollowingAction, 
-    GetNotificationsAction, 
-    UpdateAllNotificationsAsReadAction,
-    UpdateNotificationAsReadAction,
-    UpdateNotificationAsUnreadAction
+    GetNotificationsSuccessAction, 
+    MarkNotificationAsReadSuccessAction,
+    MarkNotificationAsUnreadSuccessAction,
 } from './actionsType';
 import UserActions from "./enum";
 
-export const getProfile = (user: Instalike.User): GetProfileAction => ({
-    type: UserActions.GET_PROFILE,
+export const userRequestError = (errors: any): UserRequestErrorAction => ({
+    type: UserActions.USER_REQUEST_ERROR,
+    errors
+})
+
+export const getProfileSuccess = (user: Instalike.User): GetProfileSuccessAction => ({
+    type: UserActions.GET_PROFILE_SUCCESS,
     payload: user
 })
 
-export const updateProfile = (user: Instalike.User): UpdateProfileAction => ({
+export const updateProfileSuccess = (user: Instalike.User): UpdateProfileAction => ({
     type: UserActions.UPDATE_PROFILE,
     payload: user
 })
 
-export const updateAvatar = (user: Instalike.User): UpdateAvatarAction => ({
+export const updateAvatarSuccess = (user: Instalike.User): UpdateAvatarAction => ({
     type: UserActions.UPDATE_AVATAR,
     payload: user
 })
@@ -49,22 +54,17 @@ export const deleteFollowing = (id: ResourceID): DeleteFollowingAction => ({
     payload: id
 })
 
-export const getNotifications = (notifications: Instalike.Notification[]): GetNotificationsAction => ({
-    type: UserActions.GET_NOTIFICATIONS,
+export const getNotificationsSuccess = (notifications: Instalike.Notification[]): GetNotificationsSuccessAction => ({
+    type: UserActions.GET_NOTIFICATIONS_SUCCESS,
     payload: notifications
 })
 
-export const updateAllNotificationsAsRead = (): UpdateAllNotificationsAsReadAction => ({
-    type: UserActions.UPDATE_ALL_NOTIFICATIONS_AS_READ,
-    payload: undefined
+export const markNotificationAsReadSuccess = (id: ResourceID): MarkNotificationAsReadSuccessAction => ({
+    type: UserActions.MARK_NOTIFICATION_AS_READ_SUCCESS,
+    payload: id
 })
 
-export const updateNotificationAsRead = (notification: Instalike.Notification): UpdateNotificationAsReadAction => ({
-    type: UserActions.UPDATE_NOTIFICATION_AS_READ,
-    payload: notification
-})
-
-export const updateNotificationAsUnread = (notification: Instalike.Notification): UpdateNotificationAsUnreadAction => ({
-    type: UserActions.UPDATE_NOTIFICATION_AS_UNREAD,
-    payload: notification
+export const markNotificationAsUnreadSuccess = (id: ResourceID): MarkNotificationAsUnreadSuccessAction => ({
+    type: UserActions.MARK_NOTIFICATION_AS_UNREAD_SUCCESS,
+    payload: id
 })

@@ -1,0 +1,7 @@
+.link-hover{
+    @apply hover:text-2xl
+}
+
+.flex-center {
+    @apply flex items-center justify-center
+}
