@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    background-color: rgb(10, 10, 87);
-    color: white;
-}
-
-input{
-    color: black;
-}
+:root{
+    --custom-gradient: linear-gradient(137.45deg, 
+                                        #B7F7E4 2.99%, 
+                                        #8EE8CD 10.57%, 
+                                        #20E8AC 22.93%, 
+                                        #F52A67 40.97%, 
+                                        #B11E75 61.07%, 
+                                        #220694 96.49%);
+} 

@@ -1,7 +1,66 @@
+/* Title */
+
+.title {
+    @apply font-bold capitalize text-4xl text-jet w-fit;
+}
+
+.subtitle {
+    @apply font-semibold text-xl text-jet w-fit;
+}
+
+/* Gradient */
+
+.background-gradient{
+    background: var(--custom-gradient);
+}
+
+
+.text-gradient{
+    background: var(--custom-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-gradient > *:first-child{
+    @apply z-20;
+}
+
+.border-gradient{
+    background: linear-gradient(white, white) padding-box, var(--custom-gradient) border-box;
+    @apply border-2 border-transparent;
+}
+
+button.border-gradient:hover{
+    @apply background-gradient text-white;
+}
+
+button.border-gradient:hover > *:first-child{
+    @apply text-white;
+    background: transparent !important;
+    -webkit-background-clip: inherit;
+    -webkit-text-fill-color: inherit;
+}
+
+/* Button */
+
+.button{
+    @apply p-3 rounded-md font-semibold;
+}
+
+.button-filled{
+    @apply button background-gradient text-white;
+}
+
+.button-outlined{
+    @apply button border-gradient;
+}
+
+/* General */
+
 .link-hover{
-    @apply hover:text-2xl
+    @apply hover:text-2xl;
 }
 
 .flex-center {
-    @apply flex items-center justify-center
+    @apply flex items-center justify-center;
 }
