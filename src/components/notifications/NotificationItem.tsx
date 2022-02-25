@@ -5,8 +5,7 @@ import { markNotificationAsReadRequest, markNotificationAsUnreadRequest } from "
 
 type NotificationItemType = Omit<Instalike.Notification, 'resourceType' | 'createdAt' | 'type'>
 
-const NotificationItem = ({isRead, data:{user}, id}: NotificationItemType) => {
-    const {avatar, userName} = user;
+const NotificationItem = ({isRead, data:{user: {userName, avatar}}, id}: NotificationItemType) => {
     const dispatch = useDispatch();
 
     useEffect(() => {

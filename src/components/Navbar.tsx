@@ -1,27 +1,18 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { isAuthSelector } from "redux/auth/selectors";
-import { countNotificationsToReadSelector } from "redux/user/selectors";
-import { getNotificationsRequest } from "redux/user/thunks";
 import LogoutLink from "./LogoutLink";
+import Notifications from "./notifications/Notifications";
 
 const Navbar = () => {
 
-    const dispatch = useDispatch()
     const isAuth = useSelector(isAuthSelector)
-    const countNotificationsToRead = useSelector(countNotificationsToReadSelector)
 
-    useEffect(() => {
-        if(!isAuth) return;
-        dispatch(getNotificationsRequest())
-    })
-
-    return (<header className="flex items-center p-3">
-        <span>Instalike</span>
+    return (<header className="flex items-center justify-end px-5 py-2">
+        <span className="font-display font-semibold px-1 text-2xl text-gradient">Instalike</span>
         {isAuth && (
-            <nav className="ml-auto flex items-center gap-2">
-                <Link to="/notifications">{countNotificationsToRead}</Link>
+            <nav className="mr-auto flex items-center gap-2">
+                <Notifications />
                 <Link to="/feed" className="link-hover">Feed</Link>
                 <Link to="/feed" className="link-hover">Profile</Link>
                 <LogoutLink />

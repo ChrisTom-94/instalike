@@ -31,6 +31,6 @@ export const notificationsSelector = createSelector(
 
 export const countNotificationsToReadSelector = createSelector(
   [userSelector],
-  (state) => state.notifications
+  (state) => state.notifications.filter(notif => !notif.isRead).length
 );
 

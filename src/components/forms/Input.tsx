@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputForm = ({
+const Input = ({
   type,
   name,
   value,
@@ -20,7 +20,7 @@ const InputForm = ({
         <span className="capitalize">{name}</span>
         <input
             required={isRequired}
-            className="border border-black"
+            className="border-gradient focus:outline-dashed"
             value={value}
             onChange={(e) => onChange(name, e.target.value)}
             id={name}
@@ -32,4 +32,4 @@ const InputForm = ({
   </div>
 );
 
-export default InputForm;
+export default Input;
