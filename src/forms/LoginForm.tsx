@@ -1,5 +1,6 @@
 import { ApiCredentials } from "api/types";
 import Input from "components/forms/Input";
+import Password from "components/forms/Password";
 import Submit from "components/forms/Submit";
 import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,14 +39,15 @@ const LoginForm = () => {
                 value={credentials.email}
                 onChange={change}
             />
-            <Input
+            <Password value={credentials.password} error={errors?.password} onChange={change} />
+            {/* <Input
                 error={errors?.password}
                 isRequired
                 type="password"
                 name="password"
                 value={credentials.password}
                 onChange={change}
-            />
+            /> */}
             <Submit disabled={isLoading} text="Login" />
         </form>
     )

@@ -26,7 +26,7 @@ const Auth = () => {
       <article className="mt-10">
         <h2 className="subtitle">
           Maybe it&apos;s <span className="text-paradise-pink">you ?</span>&nbsp;
-          <span className="text-4xl">👋🏼</span>
+          <span className="text-4xl">😎</span>
         </h2>
       </article>
 
