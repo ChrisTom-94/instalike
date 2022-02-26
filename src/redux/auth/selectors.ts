@@ -12,3 +12,8 @@ export const authErrorSelector = createSelector(
   [authSelector],
   (state) => state.errors
 )
+
+export const authLoadingSelector = createSelector(
+  [authSelector],
+  (state) => state.isLoading
+)

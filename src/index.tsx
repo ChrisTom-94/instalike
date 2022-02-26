@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from 'react-redux';
-import "./style/index.css";
-import "./style/utilities.css";
+import "assets/style/index.css";
 import { BrowserRouter } from "react-router-dom";
 import initStore from "redux/store";
-import App from "./App";
+import App from "App";
 
 const store = initStore()
 

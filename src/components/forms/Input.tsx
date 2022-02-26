@@ -17,18 +17,21 @@ const Input = ({
 }) => (
     <div>
         <label className="flex flex-col gap-2" htmlFor={name}>
-        <span className="capitalize">{name}</span>
+        <span className="capitalize font-bold text-acquamarine">{name}</span>
         <input
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus={error !== undefined}
             required={isRequired}
-            className="border-gradient focus:outline-dashed"
+            className="border-gradient rounded-md p-2 focus:outline-none focus:border-4"
             value={value}
+            placeholder={`Your ${name} here...`}
             onChange={(e) => onChange(name, e.target.value)}
             id={name}
             name={name}
             type={type}
         />
         </label>
-        {error && <p>{error}</p>}
+        {error && <p className="error before:content-['🚫'] mt-3">{error}</p>}
   </div>
 );
 

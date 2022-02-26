@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --custom-gradient: linear-gradient(137.45deg, 
+                                        #B7F7E4 2.99%, 
+                                        #8EE8CD 10.57%, 
+                                        #20E8AC 22.93%, 
+                                        #F52A67 40.97%, 
+                                        #B11E75 61.07%, 
+                                        #220694 96.49%);
+} 
+
+@layer base {
+    .title {
+        @apply font-bold capitalize text-4xl text-jet w-fit;
+    }
+    
+    .subtitle {
+        @apply font-semibold text-xl text-jet w-fit;
+    }
+}
+
+@layer utilities {
+    .flex-center {
+        @apply flex items-center justify-center;
+    }
+
+    .background-gradient{
+        @apply border-2 border-white;
+        background: var(--custom-gradient);
+    }
+
+    .border-gradient{
+        @apply border-2 border-transparent;
+        background: linear-gradient(white, white) padding-box, var(--custom-gradient) border-box;
+    }
+    
+    .text-gradient{
+        background: var(--custom-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .reset-text-gradient{
+        background: transparent;
+        -webkit-background-clip: inherit;
+        -webkit-text-fill-color: inherit;
+    }
+}
+
+@layer components {
+    .button{
+        @apply p-3 rounded-md font-semibold;
+    }
+    
+    .button-filled{
+        @apply button background-gradient text-white;
+    }
+    
+    .button-outlined{
+        @apply button border-gradient;
+    }
+
+    .error{
+        @apply text-red-500;
+    }
+}
