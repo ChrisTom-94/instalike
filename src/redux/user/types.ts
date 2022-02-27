@@ -1,9 +1,12 @@
+import { UserErrorStatus, UserLoadingStatus } from './enum';
+
 export type UserState = {
   data: Instalike.User;
   followSuggestions: Instalike.UserPreview[];
   following: Instalike.UserPreview[];
   notifications: Instalike.Notification[];
-  errors: object | string | null;
+  errors: {message: string, type: UserErrorStatus} | null;
+  isLoading: false | UserLoadingStatus;
 };
 
 export type UserRequiredFields = Pick<

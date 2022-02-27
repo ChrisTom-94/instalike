@@ -12,7 +12,7 @@ const Navbar = () => {
     const isAuth = useSelector(isAuthSelector)
 
     return (<header className="flex items-center justify-between px-5 py-2 fixed inset-x-0 top-0">
-        <span className="font-display font-semibold px-1 text-2xl text-gradient">Instalike</span>
+        <span className={`font-display font-semibold px-1 text-2xl text-gradient ${isAuth ? '' : 'ml-auto'}`}>Instalike</span>
         {isAuth && (
             <nav className="flex-center gap-5">
                 <Notifications />

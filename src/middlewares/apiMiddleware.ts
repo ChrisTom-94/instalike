@@ -3,13 +3,14 @@ import { Middleware } from "redux";
 import { API, ApiActionPayload } from "api/types";
 import type {RootState} from "redux/store";
 
+
 export const apiMiddleware: Middleware<{}, RootState> = store => next => async action => {
   next(action);
   if (action.type !== API) return;
 
   const { apiEndpoint, data, onSuccess, onFailure, label} = action.payload as ApiActionPayload;
 
-  store.dispatch({type: `${label}`, payload: undefined})
+  store.dispatch({type: label,  payload: undefined})
 
   try{
     const response = (data ? await apiEndpoint(data) : await apiEndpoint()) as AxiosResponse
@@ -25,8 +26,11 @@ export const apiMiddleware: Middleware<{}, RootState> = store => next => async a
 
     // const {status} = response
     // if(status === 401){
-    //   if(status === 401) store.dispatch()
-    //   next(action)
+    //   await apiClient.auth.refreshToken()
+    //   .then(({data: token}) => {
+    //     saveToken(token)
+    //     store.dispatch(action)
+    //   })
     //   return
     // }
 

@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "assets/logo.png";
-import heart from "assets/heart.png";
+import logo from "assets/images/logo.png";
+import heart from "assets/images/heart.png";
+import ButtonOutlined from "components/buttons/ButtonOutlined";
 
 const hearts = [
   {id: 1, x: "inset-x-1/4", y: "bottom-20", rotate: "rotate-12", scale: "scale-110"},
@@ -17,8 +18,10 @@ const Home = () => (
       )}
       <img alt="" src={logo} />
       <h1 className="font-display text-4xl font-medium">Instalike</h1>
-      <span className="text-4xl mt-auto">👇🏼</span>
-      <button type="button" className="button-outlined"><Link className="text-gradient hover:text-white" to="/login">Join in</Link></button>
+      <span className="text-4xl mt-auto animate-bounce">👇🏼</span>
+      <ButtonOutlined disabled={false} type="button" onClick={undefined} >
+        <Link className="text-gradient group-hover:text-white group-hover:reset-text-gradient" to="/login">Join in</Link>
+      </ButtonOutlined>
     </section>
   );
 

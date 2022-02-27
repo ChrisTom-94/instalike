@@ -1,14 +1,14 @@
 import { checkIfTokenExist } from 'utils/helpers';
 import { Reducer } from "redux";
 import {
-  LoginFailureAction,
-  LoginSuccessAction,
-  LogoutFailureAction,
-  LogoutSuccessAction,
   LoginRequestAction,
+  LoginSuccessAction,
+  LoginErrorAction,
   LogoutRequestAction,
+  LogoutErrorAction,
+  LogoutSuccessAction,
   RefreshTokenRequestAction,
-  RefreshTokenFailureAction,
+  RefreshTokenErrorAction,
   RefreshTokenSuccessAction,
 } from "./actionsType";
 import AuthActions from "./enum";
@@ -23,26 +23,27 @@ export const authInitialState: AuthState = {
 export type AuthAction =
   | LoginRequestAction
   | LoginSuccessAction
-  | LoginFailureAction
+  | LoginErrorAction
   | LogoutRequestAction
   | LogoutSuccessAction
-  | LogoutFailureAction
+  | LogoutErrorAction
   | RefreshTokenRequestAction
   | RefreshTokenSuccessAction
-  | RefreshTokenFailureAction;
+  | RefreshTokenErrorAction;
 
 const authReducer: Reducer<AuthState, AuthAction> = (
   state = authInitialState,
   action
 ) => {
   switch (action.type) {
+
     case AuthActions.AUTH_LOGIN_REQUEST:
-      return { isAuth: false, errors: null, isLoading: true };
+      return { isAuth: false, errors: null, isLoading: true }
 
     case AuthActions.AUTH_LOGIN_SUCCESS:
       return { isAuth: true, errors: null, isLoading: false };
 
-    case AuthActions.AUTH_LOGIN_FAILURE:
+    case AuthActions.AUTH_LOGIN_ERROR:
       return { isAuth: false, errors: action.errors, isLoading: false };
 
     case AuthActions.AUTH_LOGOUT_REQUEST:
@@ -51,7 +52,7 @@ const authReducer: Reducer<AuthState, AuthAction> = (
     case AuthActions.AUTH_LOGOUT_SUCCESS:
       return {...authInitialState, isAuth: false};
 
-    case AuthActions.AUTH_LOGOUT_FAILURE:
+    case AuthActions.AUTH_LOGOUT_ERROR:
       return { ...state, errors: action.errors, isLoading: false };
 
     default:

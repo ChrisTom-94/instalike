@@ -1,4 +1,4 @@
-import BackLink from "components/links/BackLink";
+import BackLink from "components/routes/links/BackLink";
 import LoginForm from "forms/LoginForm";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,9 +18,9 @@ const Auth = () => {
   }, [isAuth, dispatch, navigate]);
 
   return (
-    <section className="px-7 py-2 flex flex-col gap-20">
+    <section className="px-7 py-2 flex flex-col gap-20 mt-12">
       <article>
-        <BackLink />
+        <BackLink onClick={null} />
         <h1 className="title mt-4">Login</h1>
       </article>
       <article className="mt-10">

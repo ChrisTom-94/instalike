@@ -10,7 +10,7 @@ export interface LoginSuccessAction extends Action<typeof AuthActions.AUTH_LOGIN
     payload: undefined;
 }
 
-export interface LoginFailureAction extends Action<typeof AuthActions.AUTH_LOGIN_FAILURE> {
+export interface LoginErrorAction extends Action<typeof AuthActions.AUTH_LOGIN_ERROR> {
     errors: ApiCredentialsErrors;
 }
 
@@ -22,7 +22,7 @@ export interface LogoutSuccessAction extends Action<typeof AuthActions.AUTH_LOGO
     message: string;
 }
 
-export interface LogoutFailureAction extends Action<typeof AuthActions.AUTH_LOGOUT_FAILURE> {
+export interface LogoutErrorAction extends Action<typeof AuthActions.AUTH_LOGOUT_ERROR> {
     errors: ApiCredentialsErrors;
 }
 
@@ -31,9 +31,9 @@ export interface RefreshTokenRequestAction extends Action<typeof AuthActions.AUT
 }
 
 export interface RefreshTokenSuccessAction extends Action<typeof AuthActions.AUTH_REFRESH_TOKEN_SUCCESS> {
-    payload: Instalike.AuthJWT
+    payload: undefined
 }
 
-export interface RefreshTokenFailureAction extends Action<typeof AuthActions.AUTH_REFRESH_TOKEN_FAILURE> {
+export interface RefreshTokenErrorAction extends Action<typeof AuthActions.AUTH_REFRESH_TOKEN_ERROR> {
     message: string;
 }

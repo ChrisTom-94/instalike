@@ -8,7 +8,7 @@ const ButtonOutlined = ({
 }: {
   children: JSX.Element,
   type: "button" | "submit" | "reset" | undefined,
-  onClick: undefined | (() => void),
+  onClick: undefined | ((e: any) => void),
   disabled: boolean,
 }) => (
   <button

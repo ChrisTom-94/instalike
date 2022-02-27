@@ -1,57 +1,94 @@
 import { ResourceID } from 'api/types';
 import { 
-    UserRequestErrorAction,
     GetProfileSuccessAction, 
-    UpdateAvatarAction, 
-    DeleteAvatarAction, 
-    UpdateProfileAction, 
-    GetFollowSuggestionsAction, 
-    AddFollowingAction, 
-    DeleteFollowingAction, 
+    GetProfileErrorAction,
     GetNotificationsSuccessAction, 
     MarkNotificationAsReadSuccessAction,
-    MarkNotificationAsUnreadSuccessAction,
+    GetNotificationsErrorAction,
+    MarkNotificationAsReadErrorAction,
+    UpdateProfileSuccessAction,
+    UpdateProfileErrorAction,
+    UpdateAvatarSuccessAction,
+    UpdateAvatarErrorAction,
+    DeleteAvatarSuccessAction,
+    DeleteAvatarErrorAction,
+    GetFollowSuggestionsSuccessAction,
+    GetFollowSuggestionsErrorAction,
+    AddFollowingSuccessAction,
+    AddFollowingErrorAction,
+    DeleteFollowingSuccessAction,
+    DeleteFollowingErrorAction,
 } from './actionsType';
-import UserActions from "./enum";
-
-export const userRequestError = (errors: any): UserRequestErrorAction => ({
-    type: UserActions.USER_REQUEST_ERROR,
-    errors
-})
+import {UserActions} from "./enum";
 
 export const getProfileSuccess = (user: Instalike.User): GetProfileSuccessAction => ({
     type: UserActions.GET_PROFILE_SUCCESS,
     payload: user
 })
 
-export const updateProfileSuccess = (user: Instalike.User): UpdateProfileAction => ({
-    type: UserActions.UPDATE_PROFILE,
+export const getProfileError = (error: string): GetProfileErrorAction => ({
+    type: UserActions.GET_PROFILE_ERROR,
+    error
+})
+
+export const updateProfileSuccess = (user: Instalike.User): UpdateProfileSuccessAction => ({
+    type: UserActions.UPDATE_PROFILE_SUCCESS,
     payload: user
 })
 
-export const updateAvatarSuccess = (user: Instalike.User): UpdateAvatarAction => ({
-    type: UserActions.UPDATE_AVATAR,
+export const updateProfileError = (error: string): UpdateProfileErrorAction => ({
+    type: UserActions.UPDATE_PROFILE_ERROR,
+    errors: error
+})
+
+export const updateAvatarSuccess = (user: Instalike.User): UpdateAvatarSuccessAction => ({
+    type: UserActions.UPDATE_AVATAR_SUCCESS,
     payload: user
 })
 
-export const deleteAvatar = (): DeleteAvatarAction => ({
-    type: UserActions.DELETE_AVATAR,
+export const updateAvatarError = (error: string): UpdateAvatarErrorAction => ({
+    type: UserActions.UPDATE_AVATAR_ERROR,
+    error
+})
+
+export const deleteAvatarSuccess = (): DeleteAvatarSuccessAction => ({
+    type: UserActions.DELETE_AVATAR_SUCCESS,
     payload: undefined
 })
 
-export const getFollowSuggestion = (users: Instalike.UserPreview[]): GetFollowSuggestionsAction => ({
-    type: UserActions.GET_FOLLOW_SUGGESTIONS,
+export const deleteAvatarError = (error: string): DeleteAvatarErrorAction => ({
+    type: UserActions.DELETE_AVATAR_ERROR,
+    error
+})
+
+export const getFollowSuggestionSuccess = (users: Instalike.UserPreview[]): GetFollowSuggestionsSuccessAction => ({
+    type: UserActions.GET_FOLLOW_SUGGESTIONS_SUCCESS,
     payload: users
 })
 
-export const addFollowing = (user: Instalike.UserPreview): AddFollowingAction => ({
-    type: UserActions.ADD_FOLLOWING,
+export const getFollowSuggestionError = (error: string): GetFollowSuggestionsErrorAction => ({
+    type: UserActions.GET_FOLLOW_SUGGESTIONS_ERROR,
+    error
+})
+
+export const addFollowingSuccess = (user: Instalike.UserPreview): AddFollowingSuccessAction => ({
+    type: UserActions.ADD_FOLLOWING_SUCCESS,
     payload: user
 })
 
-export const deleteFollowing = (id: ResourceID): DeleteFollowingAction => ({
-    type: UserActions.DELETE_FOLLOWING,
+export const addFollowingError = (error: string): AddFollowingErrorAction => ({
+    type: UserActions.ADD_FOLLOWING_ERROR,
+    error
+})
+
+export const deleteFollowingSuccess = (id: ResourceID): DeleteFollowingSuccessAction => ({
+    type: UserActions.DELETE_FOLLOWING_SUCCESS,
     payload: id
+})
+
+export const deleteFollowingError = (error: string): DeleteFollowingErrorAction => ({
+    type: UserActions.DELETE_FOLLOWING_ERROR,
+    error
 })
 
 export const getNotificationsSuccess = (notifications: Instalike.Notification[]): GetNotificationsSuccessAction => ({
@@ -59,12 +96,17 @@ export const getNotificationsSuccess = (notifications: Instalike.Notification[])
     payload: notifications
 })
 
+export const getNotificationsError = (error: string): GetNotificationsErrorAction => ({
+    type: UserActions.GET_NOTIFICATIONS_ERROR,
+    error
+})
+
 export const markNotificationAsReadSuccess = (id: ResourceID): MarkNotificationAsReadSuccessAction => ({
     type: UserActions.MARK_NOTIFICATION_AS_READ_SUCCESS,
     payload: id
 })
 
-export const markNotificationAsUnreadSuccess = (id: ResourceID): MarkNotificationAsUnreadSuccessAction => ({
-    type: UserActions.MARK_NOTIFICATION_AS_UNREAD_SUCCESS,
-    payload: id
+export const markNotificationAsReadError = (error: string): MarkNotificationAsReadErrorAction => ({
+    type: UserActions.MARK_NOTIFICATION_AS_READ_ERROR,
+    error
 })

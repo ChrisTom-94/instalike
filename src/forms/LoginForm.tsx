@@ -40,14 +40,6 @@ const LoginForm = () => {
                 onChange={change}
             />
             <Password value={credentials.password} error={errors?.password} onChange={change} />
-            {/* <Input
-                error={errors?.password}
-                isRequired
-                type="password"
-                name="password"
-                value={credentials.password}
-                onChange={change}
-            /> */}
             <Submit disabled={isLoading} text="Login" />
         </form>
     )

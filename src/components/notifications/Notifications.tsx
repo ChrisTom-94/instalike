@@ -9,7 +9,7 @@ import {
 import { getNotificationsRequest } from "redux/user/thunks";
 import { ReactComponent as Bell } from "assets/images/bell.svg";
 import { ReactComponent as BellFilled } from "assets/images/bell-filled.svg";
-import BackLink from "components/links/BackLink";
+import BackLink from "components/routes/links/BackLink";
 import NotificationItem from "./NotificationItem";
 
 const Notifications = () => {
