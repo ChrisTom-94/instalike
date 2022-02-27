@@ -24,7 +24,7 @@ const Navbar = () => {
                 <NavLink to="/search" className="link-hover"><SearchIcon /></NavLink>
                 <NavLink to="/feed" className="link-hover"><HomeIcon /></NavLink>
                 <NavLink to="/profile/me" className="link-hover w-10">
-                    <UserAvatar avatar={null} />
+                    <UserAvatar className="border-2" avatar={null} />
                 </NavLink>
             </nav>
         )}

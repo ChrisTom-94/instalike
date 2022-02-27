@@ -8,6 +8,8 @@ import {
   getNotificationsError,
   markNotificationAsReadSuccess,
   markNotificationAsReadError,
+  addFollowingError,
+  addFollowingSuccess,
 } from "./actions";
 import { UserActions } from "./enum";
 
@@ -37,3 +39,19 @@ export const markNotificationAsReadRequest = (id: ResourceID): ApiAction =>
     onFailure: markNotificationAsReadError,
     label: UserActions.MARK_NOTIFICATION_AS_READ_REQUEST,
   });
+
+export const followRequest = (id: ResourceID): ApiAction => apiAction({
+  apiEndpoint: apiClient.user.follow,
+  data: id,
+  onSuccess: addFollowingSuccess,
+  onFailure: addFollowingError,
+  label: UserActions.MARK_NOTIFICATION_AS_READ_REQUEST,
+}) 
+
+export const unfollowRequest = (id: ResourceID): ApiAction => apiAction({
+  apiEndpoint: apiClient.user.unfollow,
+  data: id,
+  onSuccess: addFollowingSuccess,
+  onFailure: addFollowingError,
+  label: UserActions.MARK_NOTIFICATION_AS_READ_REQUEST,
+}) 

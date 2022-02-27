@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "assets/images/logo.png";
-import heart from "assets/images/heart.png";
+import heart from "assets/images/heart.svg";
 import ButtonOutlined from "components/buttons/ButtonOutlined";
 
 const hearts = [

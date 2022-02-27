@@ -12,3 +12,8 @@ export const postSelector = createSelector(
     [postsSelector],
     (state) => state.post
 )
+
+export const userPostsCountSelector = createSelector(
+    [postsSelector],
+    (state) => state.ownPosts.count
+)

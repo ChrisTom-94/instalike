@@ -1,9 +1,9 @@
 import React from "react";
-import heart  from "assets/images/heart.png";
+import heart  from "assets/images/heart.svg";
 
-const UserAvatar = ({avatar}: {avatar: string | null}) => (
-    <div className="border-gradient flex-center aspect-square rounded-full p-2">
-         <img alt="" className="block w-full" src={avatar ?? heart} />
+const UserAvatar = ({avatar, className}: {avatar: string | null, className: string}) => (
+    <div className={`border-gradient flex-center aspect-square rounded-full ${className}`}>
+         <img alt="" className="block w-2/4" src={avatar ?? heart} />
     </div>
 )
 

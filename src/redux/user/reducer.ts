@@ -10,6 +10,9 @@ import {
   MarkNotificationAsReadRequestAction,
   MarkNotificationAsReadSuccessAction,
   MarkNotificationAsReadErrorAction,
+  AddFollowingErrorAction,
+  AddFollowingRequestAction,
+  AddFollowingSuccessAction,
 } from "./actionsType";
 import {UserActions, UserErrorStatus, UserLoadingStatus} from "./enum";
 
@@ -32,6 +35,9 @@ export type UserAction =
   | MarkNotificationAsReadRequestAction
   | MarkNotificationAsReadSuccessAction
   | MarkNotificationAsReadErrorAction
+  | AddFollowingRequestAction
+  | AddFollowingSuccessAction
+  | AddFollowingErrorAction
 
 const userReducer: Reducer<UserState, UserAction> = (
   state = userInitialState,
@@ -70,6 +76,15 @@ const userReducer: Reducer<UserState, UserAction> = (
 
     case UserActions.MARK_NOTIFICATION_AS_READ_ERROR:
       return { ...state, errors: {message: action.error, type: UserErrorStatus.ERROR_NOTIFICATIONS}, isLoading: false };
+
+    case UserActions.ADD_FOLLOWING_REQUEST:
+      return { ...state,  errors: null, isLoading: UserLoadingStatus.LOADING_FOLLOWING };
+
+    case UserActions.ADD_FOLLOWING_SUCCESS:
+      return { ...state, following: [...state.following, action.payload], errors: null, isLoading: false };
+
+    case UserActions.ADD_FOLLOWING_ERROR:
+      return { ...state, errors: {message: action.error, type: UserErrorStatus.ERROR_FOLLOWING}, isLoading: false };
 
     default:
       return state;

@@ -3,6 +3,11 @@ import type { RootState } from "../store";
 
 export const userSelector = (state: RootState) => state.user;
 
+export const userProfileIDSelector = createSelector(
+  [userSelector],
+  (state) => state.data.id
+);
+
 export const userProfileSelector = createSelector(
   [userSelector],
   (state) => state.data
@@ -32,5 +37,10 @@ export const notificationsSelector = createSelector(
 export const countNotificationsToReadSelector = createSelector(
   [userSelector],
   (state) => state.notifications.filter(notif => !notif.isRead).length
+);
+
+export const userViewSelector = createSelector(
+  [userSelector],
+  (state) => ({isFollowedByViewer: state.data.isFollowedByViewer, isViewer: state.data.isViewer})
 );
 

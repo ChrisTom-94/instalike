@@ -15,10 +15,12 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="*" element={<NotFound />} />
-        <Route path="/login" element={<Auth />} />
-        <Route path="/profile/:username" element={<RequireAuth><Profile /></RequireAuth>} />
-        <Route path="/feed" element={<RequireAuth><Feed /></RequireAuth>} />
-        <Route path="/notifications" element={<RequireAuth><Notifications /></RequireAuth>} />
+        <Route path="login" element={<Auth />} />
+        <Route path="profile/:username" element={<RequireAuth><Profile /></RequireAuth>}>
+          <Route path="posts" element={<div>Ok</div>} />
+        </Route>
+        <Route path="feed" element={<RequireAuth><Feed /></RequireAuth>} />
+        <Route path="notifications" element={<RequireAuth><Notifications /></RequireAuth>} />
         <Route index element={<Home />} />
       </Routes>
     </main>

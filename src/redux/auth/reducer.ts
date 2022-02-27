@@ -1,4 +1,3 @@
-import { checkIfTokenExist } from 'utils/helpers';
 import { Reducer } from "redux";
 import {
   LoginRequestAction,
@@ -15,7 +14,7 @@ import AuthActions from "./enum";
 import { AuthState } from "./types";
 
 export const authInitialState: AuthState = {
-  isAuth: checkIfTokenExist(),
+  isAuth: false,
   errors: null,
   isLoading: false,
 };
