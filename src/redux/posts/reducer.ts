@@ -1,4 +1,5 @@
 import { Reducer } from "redux";
+import { generateEmptyPostsFeed } from "utils/helpers";
 import {
   GetFeedRequestAction,
   GetFeedSuccessAction,
@@ -10,26 +11,12 @@ import {
 import PostsActions from "./enum";
 import { PostsState } from "./type";
 
-const emptyPostFeed = (): Instalike.PostFeed => ({
-  resourceType: "PostFeed",
-  items: [],
-  count: 0,
-  cursor: null,
-  previousCursor: null,
-  nextCursor: null,
-  isEmpty: true,
-  hasMorePages: false,
-  hasPages: false,
-  onFirstPage: true,
-});
-
 export const postsInitialState: PostsState = {
-  feed: emptyPostFeed(),
-  ownPosts: emptyPostFeed(),
-  userPosts: emptyPostFeed(),
-  isLoading: false,
+  feed: generateEmptyPostsFeed(),
+  currentPosts: generateEmptyPostsFeed(),
+  currentPost: null,
   errors: null,
-  post: null,
+  isLoading: false,
 };
 
 export type PostsAction =
@@ -75,12 +62,7 @@ const postsReducer: Reducer<PostsState, PostsAction> = (
         feed: {
           ...state.feed,
           count: state.feed.count + 1,
-          items: [action.payload, ...(state.feed?.items as Instalike.Post[])],
-        },
-        ownPosts: {
-          ...state.ownPosts,
-          count: state.feed.count + 1,
-          items: [action.payload, ...(state.feed?.items as Instalike.Post[])],
+          items: [action.payload, ...state.feed.items],
         },
         errors: null,
         isLoading: false,
@@ -95,3 +77,4 @@ const postsReducer: Reducer<PostsState, PostsAction> = (
 };
 
 export default postsReducer;
+

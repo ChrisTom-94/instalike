@@ -1,26 +1,29 @@
-import { AxiosResponse, AxiosError } from 'axios';
+import { deleteToken, saveToken } from 'utils/helpers';
+import AuthActions from 'redux/auth/enum';
+import { AxiosError } from 'axios';
 import { Middleware } from "redux";
-import { API, ApiActionPayload } from "api/types";
+import { API } from "api/types";
 import type {RootState} from "redux/store";
 
-
-export const apiMiddleware: Middleware<{}, RootState> = store => next => async action => {
+export const apiMiddleware: Middleware<{}, RootState> = ({dispatch}) => next => async action => {
   next(action);
   if (action.type !== API) return;
 
-  const { apiEndpoint, data, onSuccess, onFailure, label} = action.payload as ApiActionPayload;
+  const {apiEndpoint, data, onSuccess, onFailure, label} = action.payload;
 
-  store.dispatch({type: label,  payload: undefined})
+  dispatch({type: label,  payload: undefined})
 
   try{
-    const response = (data ? await apiEndpoint(data) : await apiEndpoint()) as AxiosResponse
-    store.dispatch(onSuccess(response.data ?? undefined))
+    const response = (data ? await apiEndpoint(data) : await apiEndpoint())
+    dispatch(onSuccess(response.data ?? undefined))
+    if(AuthActions.AUTH_LOGIN_REQUEST === label) saveToken(response.data)
+    if(AuthActions.AUTH_LOGOUT_REQUEST === label) deleteToken()
   }catch(error: any){
     const {response} = error as AxiosError
 
     if(!response) {
       // Network error
-      store.dispatch(onFailure({message: error.message}))
+      dispatch(onFailure({message: error.message}))
       return
     }
 
@@ -35,8 +38,8 @@ export const apiMiddleware: Middleware<{}, RootState> = store => next => async a
     // }
 
     const {message, errors = null, } = response.data
-    if(errors) store.dispatch(onFailure(errors))
-    else store.dispatch(onFailure({message}))
+    if(errors) dispatch(onFailure(errors))
+    else dispatch(onFailure({message}))
   }
 }
 

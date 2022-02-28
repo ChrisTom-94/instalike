@@ -5,6 +5,7 @@ export type UserState = {
   followSuggestions: Instalike.UserPreview[];
   following: Instalike.UserPreview[];
   notifications: Instalike.Notification[];
+  posts: Instalike.PostFeed,
   errors: {message: string, type: UserErrorStatus} | null;
   isLoading: false | UserLoadingStatus;
 };

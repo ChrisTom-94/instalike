@@ -10,3 +10,16 @@ export const dateDiff = (date: string) => {
 }
 
 export const extractNotificationType = (type: string) => type.split("user_has").pop()?.split("_").join(" ")
+
+export const generateEmptyPostsFeed = (): Instalike.PostFeed => ({
+    resourceType: "",
+    items: [],
+    count: 0,
+    cursor: null,
+    nextCursor: null,
+    previousCursor: null,
+    isEmpty: true,
+    hasMorePages: false,
+    hasPages: false,
+    onFirstPage: false,
+  })

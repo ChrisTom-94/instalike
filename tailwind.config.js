@@ -22,5 +22,10 @@ module.exports = {
       }
     },
   },
+  safelist: [
+    "bg-paradise-pink",
+    "bg-acquamarine",
+    "bg-duke-blue"
+  ],
   plugins: [],
 }

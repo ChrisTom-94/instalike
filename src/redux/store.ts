@@ -4,7 +4,7 @@ import {
   combineReducers,
   Middleware,
 } from "redux";
-import { apiMiddleware } from "middlewares/apiMiddleware";
+import apiMiddleware from "middlewares/apiMiddleware";
 import { composeWithDevTools } from "redux-devtools-extension";
 import userReducer from "./user/reducer";
 import authReducer from "./auth/reducer";

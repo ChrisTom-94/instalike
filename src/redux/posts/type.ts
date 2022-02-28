@@ -6,9 +6,8 @@ export type PostWithRequired = {
 
 export type PostsState = {
   feed: Instalike.PostFeed,
-  ownPosts: Instalike.PostFeed,
-  userPosts: Instalike.PostFeed,
-  post: Instalike.Post | null,
+  currentPosts: Instalike.PostFeed,
+  currentPost: Instalike.Post | null,
   errors: string[] | string | null
   isLoading: boolean,
 };

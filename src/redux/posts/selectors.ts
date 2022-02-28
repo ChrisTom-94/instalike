@@ -8,12 +8,7 @@ export const feedSelector = createSelector(
     (state) => state.feed
 );
 
-export const postSelector = createSelector(
+export const userPostsSelector = createSelector(
     [postsSelector],
-    (state) => state.post
-)
-
-export const userPostsCountSelector = createSelector(
-    [postsSelector],
-    (state) => state.ownPosts.count
+    (state) => state.currentPosts
 )

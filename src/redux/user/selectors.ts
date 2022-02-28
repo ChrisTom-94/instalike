@@ -13,6 +13,11 @@ export const userProfileSelector = createSelector(
   (state) => state.data
 );
 
+export const userPostsCountSelector = createSelector(
+  [userSelector],
+  (state) => state.posts.count
+)
+
 export const userProfilePreviewSelector = createSelector(
   [userSelector],
   (state): Instalike.UserPreview => ({

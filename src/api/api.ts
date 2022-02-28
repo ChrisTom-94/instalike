@@ -1,9 +1,10 @@
+import { ApiCredentials, ApiResourceId } from 'api/types';
+import { UserUpdatePayload } from 'redux/user/types';
 import axios from "axios";
-import { ApiClient } from "./types";
 
 export const API_TOKEN = "API_TOKEN";
 
-const apiClient: ApiClient = {
+const apiClient = {
   api: axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     headers: {
@@ -12,68 +13,68 @@ const apiClient: ApiClient = {
   }),
 
   auth: {
-    login: (credentials) => apiClient.api.post("/auth/login", credentials),
+    login: (credentials: ApiCredentials) => apiClient.api.post<Instalike.AuthJWT>("/auth/login", credentials),
 
-    logout: () => apiClient.api.post("/auth/logout"),
+    logout: () => apiClient.api.post<{}>("/auth/logout"),
 
-    refreshToken: () => apiClient.api.post("/auth/refresh"),
+    refreshToken: () => apiClient.api.post<Instalike.AuthJWT>("/auth/refresh"),
   },
 
   user: {
 
-    fetchById: (id) => apiClient.api.get(`/users/${id}`),
+    fetchById: (id: ApiResourceId) => apiClient.api.get<Instalike.User>(`/users/${id}`),
 
-    fetchAll: () => apiClient.api.get("/users/"),
+    fetchAll: () => apiClient.api.get<Instalike.User[]>("/users/"),
 
-    profile: () => apiClient.api.get("/users/me"),
+    profile: ()=> apiClient.api.get<Instalike.User>("/users/me"),
 
-    updateProfile: (user) => apiClient.api.put("/users/me", user),
+    updateProfile: (user: UserUpdatePayload) => apiClient.api.put<Instalike.User>("/users/me", user),
 
-    updateAvatar: (resource) => apiClient.api.post("/users/me/avatar", { resource }),
+    updateAvatar: (resource: File) => apiClient.api.post<Instalike.User>("/users/me/avatar", { resource }),
 
-    deleteAvatar: () =>apiClient.api.delete("/users/me/avatar"),
+    deleteAvatar: () =>apiClient.api.delete<Instalike.User>("/users/me/avatar"),
 
-    updatePassword: () => apiClient.api.put("/users/me/password"),
+    updatePassword: () => apiClient.api.put<{}>("/users/me/password"),
 
-    followSuggestions: (amount) => apiClient.api.get("/users/me/follow-suggestions", { params: { amount } }),
+    followSuggestions: (amount: number) => apiClient.api.get<Instalike.User[]>("/users/me/follow-suggestions", { params: { amount } }),
 
-    followers: () => apiClient.api.get("/users/me/followers"),
+    followers: () => apiClient.api.get<Instalike.User[]>("/users/me/followers"),
 
-    following: () => apiClient.api.get("/users/me/following"),
+    following: () => apiClient.api.get<Instalike.User[]>("/users/me/following"),
 
-    follow: (id) => apiClient.api.post(`/users/me/followers/${id}/follow`),
+    follow: (id: ApiResourceId) => apiClient.api.post<Instalike.User>(`/users/me/followers/${id}/follow`),
 
-    unfollow: (id) => apiClient.api.delete(`/users/me/followers/${id}/follow`),
+    unfollow: (id: ApiResourceId) => apiClient.api.delete<Instalike.User>(`/users/me/followers/${id}/follow`),
 
-    notifications: () => apiClient.api.get("/users/me/notifications"),
+    notifications: () => apiClient.api.get<Instalike.Notification[]>("/users/me/notifications"),
 
-    readNotification: (id)=> apiClient.api.post(`/users/me/notifications/${id}/read`),
+    readNotification: (id: ApiResourceId)=> apiClient.api.post<Instalike.Notification>(`/users/me/notifications/${id}/read`),
 
-    unreadNotification: (id) => apiClient.api.delete(`/users/me/notifications/${id}/read`),
+    unreadNotification: (id: ApiResourceId) => apiClient.api.delete<Instalike.Notification>(`/users/me/notifications/${id}/read`),
   },
 
   posts: {
-    userFeed: (amount) => apiClient.api.get("/users/me/feed", { params: { amount } }),
+    userFeed: (amount: ApiResourceId) => apiClient.api.get("/users/me/feed", { params: { amount } }),
 
-    userPosts: (amount) => apiClient.api.get("/users/me/posts", { params: { amount } }),
+    userPosts: (amount: ApiResourceId) => apiClient.api.get("/users/me/posts", { params: { amount } }),
 
-    create: (post) => apiClient.api.post("/posts", post),
+    create: (post: Instalike.Post) => apiClient.api.post("/posts", post),
 
-    update: (id, data) => apiClient.api.put(`/posts/${id}`, data),
+    update: (id: ApiResourceId, data: Instalike.Post) => apiClient.api.put(`/posts/${id}`, data),
 
-    delete: (id) => apiClient.api.put(`/posts/${id}`),
+    delete: (id: ApiResourceId) => apiClient.api.put(`/posts/${id}`),
 
-    like: (id) => apiClient.api.post(`/posts/${id}/like`),
+    like: (id: ApiResourceId) => apiClient.api.post(`/posts/${id}/like`),
 
-    unlike: (id) => apiClient.api.delete(`/posts/${id}/like`),
+    unlike: (id: ApiResourceId) => apiClient.api.delete(`/posts/${id}/like`),
 
-    comments: (id) => apiClient.api.get(`/posts/${id}/comments`),
+    comments: (id: ApiResourceId) => apiClient.api.get(`/posts/${id}/comments`),
 
-    getComment: (idPost, idComment) => apiClient.api.get(`/posts/${idPost}/comments/${idComment}`),
+    getComment: (idPost: ApiResourceId, idComment: ApiResourceId) => apiClient.api.get(`/posts/${idPost}/comments/${idComment}`),
 
-    updateComment: (idPost, idComment, text) => apiClient.api.put(`/posts/${idPost}/comments/${idComment}`, { text }),
+    updateComment: (idPost: ApiResourceId, idComment: ApiResourceId, text: string) => apiClient.api.put(`/posts/${idPost}/comments/${idComment}`, { text }),
 
-    removeComment: (idPost, idComment) => apiClient.api.delete(`/posts/${idPost}/comments/${idComment}`),
+    removeComment: (idPost: ApiResourceId, idComment: ApiResourceId) => apiClient.api.delete(`/posts/${idPost}/comments/${idComment}`),
   },
 };
 

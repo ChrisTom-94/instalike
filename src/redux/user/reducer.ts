@@ -1,4 +1,5 @@
 import { Reducer } from "redux";
+import { generateEmptyPostsFeed } from "utils/helpers";
 import { UserState } from "./types";
 import {
   GetProfileRequestAction,
@@ -22,6 +23,7 @@ export const userInitialState: UserState = {
   followSuggestions: [],
   following: [],
   notifications: [],
+  posts: generateEmptyPostsFeed(),
   isLoading: false
 };
 

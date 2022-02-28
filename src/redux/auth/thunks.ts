@@ -5,7 +5,7 @@ import apiClient from "api/api";
 import { loginError, loginSuccess, logoutError, logoutSuccess, refreshTokenError, refreshTokenSuccess } from './actions';
 import AuthActions from "./enum";
 
-export const loginRequest = (credentials: ApiCredentials): ApiAction => apiAction({
+export const loginRequest = (credentials: ApiCredentials) => apiAction({
     apiEndpoint: apiClient.auth.login,
     data: credentials,
     onSuccess: loginSuccess,
@@ -21,7 +21,7 @@ export const logoutRequest = (): ApiAction => apiAction({
     label: AuthActions.AUTH_LOGOUT_REQUEST
 })
 
-export const refreshTokenRequest = (): ApiAction => apiAction({
+export const refreshTokenRequest = () => apiAction({
     apiEndpoint: apiClient.auth.refreshToken,
     data: null,
     onSuccess: refreshTokenSuccess,

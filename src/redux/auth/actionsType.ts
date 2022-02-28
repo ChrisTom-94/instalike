@@ -31,7 +31,7 @@ export interface RefreshTokenRequestAction extends Action<typeof AuthActions.AUT
 }
 
 export interface RefreshTokenSuccessAction extends Action<typeof AuthActions.AUTH_REFRESH_TOKEN_SUCCESS> {
-    payload: undefined
+    payload: Instalike.AuthJWT
 }
 
 export interface RefreshTokenErrorAction extends Action<typeof AuthActions.AUTH_REFRESH_TOKEN_ERROR> {

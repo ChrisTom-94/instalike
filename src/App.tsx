@@ -17,7 +17,9 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="login" element={<Auth />} />
         <Route path="profile/:username" element={<RequireAuth><Profile /></RequireAuth>}>
-          <Route path="posts" element={<div>Ok</div>} />
+          <Route index element={<div>Posts</div>} />
+          <Route path="following" element={<div>Following</div>} />
+          <Route path="followers" element={<div>Followers</div>} />
         </Route>
         <Route path="feed" element={<RequireAuth><Feed /></RequireAuth>} />
         <Route path="notifications" element={<RequireAuth><Notifications /></RequireAuth>} />
