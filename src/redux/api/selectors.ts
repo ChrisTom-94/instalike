@@ -1,19 +1,14 @@
 import { createSelector } from "reselect";
 import type { RootState } from "../store";
 
-const authSelector = (state: RootState) => state.auth
+const apiSelector = (state: RootState) => state.api
 
 export const isAuthSelector = createSelector(
-  [authSelector],
+  [apiSelector],
   (state) => state.isAuth
 );
 
-export const authErrorSelector = createSelector(
-  [authSelector],
-  (state) => state.errors
-)
-
 export const authLoadingSelector = createSelector(
-  [authSelector],
+  [apiSelector],
   (state) => state.isLoading
 )

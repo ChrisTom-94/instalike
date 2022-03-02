@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { logoutRequest } from "redux/auth/thunks";
+import { logoutAsync } from "redux/api/thunks";
 
 const  LogoutLink = () => {
 
@@ -9,7 +9,7 @@ const  LogoutLink = () => {
 
   const onClick = (e: any) => {
     e.preventDefault()
-    dispatch(logoutRequest())
+    dispatch(logoutAsync())
   };
 
   return <Link className="link-hover" to="/logout" onClick={onClick}>Logout</Link>;

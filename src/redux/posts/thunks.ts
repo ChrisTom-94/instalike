@@ -1,14 +1,11 @@
-import apiAction from "api/actions";
-import apiClient from "api/api";
-import { ApiAction } from "api/types";
-import { getFeedError, getFeedSuccess } from './actions';
+import apiAction from "redux/api/actions";
+import apiClient from "redux/api/api";
+import type { ApiAction } from "redux/api/types";
 import PostsActions from "./enum";
 
 const feedRequest = (): ApiAction => apiAction({
-    apiEndpoint: apiClient.posts.userFeed,
+    apiEndpoint: apiClient.posts.feed,
     data: null,
-    onSuccess: getFeedSuccess,
-    onFailure: getFeedError,
     label: PostsActions.GET_FEED_REQUEST
 })
 

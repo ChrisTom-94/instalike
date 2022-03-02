@@ -1,4 +1,4 @@
-import { ApiResourceId } from 'api/types';
+import { ResourceID } from 'redux/api/types';
 import { 
     GetProfileSuccessAction, 
     GetProfileErrorAction,
@@ -81,7 +81,7 @@ export const addFollowingError = (error: string): AddFollowingErrorAction => ({
     error
 })
 
-export const deleteFollowingSuccess = (id: ApiResourceId): DeleteFollowingSuccessAction => ({
+export const deleteFollowingSuccess = (id: ResourceID): DeleteFollowingSuccessAction => ({
     type: UserActions.DELETE_FOLLOWING_SUCCESS,
     payload: id
 })
@@ -101,7 +101,7 @@ export const getNotificationsError = (error: string): GetNotificationsErrorActio
     error
 })
 
-export const markNotificationAsReadSuccess = (id: ApiResourceId): MarkNotificationAsReadSuccessAction => ({
+export const markNotificationAsReadSuccess = (id: ResourceID): MarkNotificationAsReadSuccessAction => ({
     type: UserActions.MARK_NOTIFICATION_AS_READ_SUCCESS,
     payload: id
 })

@@ -1,4 +1,4 @@
-import { ApiResourceId } from "api/types";
+import { ResourceID } from "redux/api/types";
 import { Action } from "redux";
 import {UserActions} from "./enum";
 
@@ -111,7 +111,7 @@ export interface DeleteFollowingRequestAction
 }
 export interface DeleteFollowingSuccessAction
   extends Action<typeof UserActions.DELETE_FOLLOWING_SUCCESS> {
-  payload: ApiResourceId;
+  payload: ResourceID;
 }
 
 export interface DeleteFollowingErrorAction
@@ -140,7 +140,7 @@ export interface MarkNotificationAsReadRequestAction
 
 export interface MarkNotificationAsReadSuccessAction
   extends Action<typeof UserActions.MARK_NOTIFICATION_AS_READ_SUCCESS> {
-  payload: ApiResourceId;
+  payload: ResourceID;
 }
 export interface MarkNotificationAsReadErrorAction
   extends Action<typeof UserActions.MARK_NOTIFICATION_AS_READ_ERROR> {

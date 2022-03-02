@@ -1,8 +1,9 @@
-import { API_TOKEN } from 'api/api';
+import { API_TOKEN } from 'redux/api/api';
 
+export const getToken = () => localStorage.getItem(API_TOKEN)
 export const saveToken = (token: Instalike.AuthJWT) => sessionStorage.setItem(API_TOKEN, token.accessToken) 
 export const deleteToken = () => sessionStorage.removeItem(API_TOKEN)
-export const checkIfTokenExist = () => sessionStorage.getItem(API_TOKEN) !== null
+export const tokenExist = () => sessionStorage.getItem(API_TOKEN) !== null
 
 export const dateDiff = (date: string) => {
     const diff = Math.abs(new Date().getTime() - new Date(date).getTime());

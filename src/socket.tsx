@@ -1,6 +1,6 @@
 import Pusher, { Options } from "pusher-js";
 import Echo from "laravel-echo";
-import { API_TOKEN } from "./api/api";
+import { API_TOKEN } from "./redux/api/api";
 
 Pusher.logToConsole = true;
 

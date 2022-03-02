@@ -1,23 +1,26 @@
+import apiClient from 'redux/api/api';
+import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import {
   createStore,
   applyMiddleware,
   combineReducers,
   Middleware,
+  AnyAction,
 } from "redux";
-import apiMiddleware from "middlewares/apiMiddleware";
 import { composeWithDevTools } from "redux-devtools-extension";
 import userReducer from "./user/reducer";
-import authReducer from "./auth/reducer";
+import apiReducer from "./api/reducer";
 import postsReducer from "./posts/reducer";
+import { ApiInstance } from './api/types';
 
 export const rootReducer = combineReducers({
+  api: apiReducer,
   user: userReducer,
-  auth: authReducer,
   posts: postsReducer
 });
 
 export const middlewares: Middleware[] = [];
-middlewares.push(apiMiddleware);
+middlewares.push(thunk.withExtraArgument(apiClient));
 
 const initStore = (preloadedState?: RootState) =>
   createStore(
@@ -27,5 +30,8 @@ const initStore = (preloadedState?: RootState) =>
   );
 
 export type RootState = ReturnType<typeof rootReducer>;
+
+export type AppThunkAction<R = void> = ThunkAction<R, RootState, ApiInstance, AnyAction>
+export type AppThunkDispatch = ThunkDispatch<RootState, ApiInstance, AnyAction>;
 
 export default initStore;

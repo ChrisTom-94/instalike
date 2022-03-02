@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import {ReactComponent as PlusIcon} from "assets/images/plus.svg";
 import {ReactComponent as SearchIcon} from "assets/images/search.svg";
 import {ReactComponent as HomeIcon} from "assets/images/home.svg";
-import { isAuthSelector } from "redux/auth/selectors";
+import { isAuthSelector } from "redux/api/selectors";
 import Notifications from "./notifications/Notifications";
 import UserAvatar from "./user/UserAvatar";
 

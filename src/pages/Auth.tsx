@@ -3,7 +3,7 @@ import LoginForm from "forms/LoginForm";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { isAuthSelector } from "redux/auth/selectors";
+import { isAuthSelector } from "redux/api/selectors";
 import { getProfileRequest } from "redux/user/thunks";
 
 const Auth = () => {
