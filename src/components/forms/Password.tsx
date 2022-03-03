@@ -31,7 +31,7 @@ const Password = ({
         onChange={onChange}
       />
       <button
-        className="absolute right-3 bottom-4 z-10"
+        className="absolute right-3 top-11 z-10"
         type="button"
         aria-label="toggle password"
         onClick={togglePasswordVisibilty}

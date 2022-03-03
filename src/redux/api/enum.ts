@@ -9,5 +9,6 @@ export enum ApiActions {
 
 export enum LoadingStatus {
     LOADING_USER = "LOADING_USER",
-    LOADING_POSTS = "LOADING_POSTS"
+    LOADING_POSTS = "LOADING_POSTS",
+    LOADING_NOTIFICATIONS = "LOADING_NOTIFICATIONS"
 }

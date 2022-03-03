@@ -4,7 +4,7 @@ import Password from "components/forms/Password";
 import Submit from "components/forms/Submit";
 import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { authLoadingSelector } from "redux/api/selectors";
+import { isLoadingUserSelector, loginErrorsSelector } from "redux/api/selectors";
 import { loginAsync } from "redux/api/thunks";
 
 const emptyCredentials: ApiCredentials = {
@@ -14,7 +14,8 @@ const emptyCredentials: ApiCredentials = {
 
 const LoginForm = () => {
 
-    const isLoading = useSelector(authLoadingSelector);
+    const isLoading = useSelector(isLoadingUserSelector);
+    const {email, password, message} = useSelector(loginErrorsSelector)
     const [credentials, setCredentials] = useState<ApiCredentials>(emptyCredentials);
     const dispatch = useDispatch();
 
@@ -24,26 +25,21 @@ const LoginForm = () => {
 
     const submit = useCallback(async (e: any) => {
         e.preventDefault();
-        try{
-          dispatch(loginAsync(credentials));
-        }catch(error: any){
-          console.log(error.data.response)
-        }
-    
+        dispatch(loginAsync(credentials));
       }, [credentials, dispatch]);
 
     return (
         <form className="flex flex-col gap-4" onSubmit={submit}>
-            {/* {errors?.message && <p className="error before:content-['⛔']">{errors?.message}</p>} */}
+            {message && <p className="error before:content-['⛔']">{message}</p>}
             <Input
-                error={undefined}
+                error={email}
                 isRequired
                 type="email"
                 name="email"
                 value={credentials.email}
                 onChange={change}
             />
-            <Password value={credentials.password} error={undefined} onChange={change} />
+            <Password value={credentials.password} error={password} onChange={change} />
             <Submit disabled={isLoading} text="Login" />
         </form>
     )

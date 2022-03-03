@@ -1,10 +1,10 @@
-import { LoginAction, LogoutAction, RequestEndAction, RequestErrorAction, RequestStartAction } from "./actionsType"
-import {ApiActions} from "./enum"
-import { ApiAction, ApiActionPayload } from "./types"
+import type { LoginAction, LogoutAction, RequestEndAction, RequestErrorAction, RequestStartAction } from "./actionsType"
+import type { ApiErrors } from "./types"
+import {ApiActions, LoadingStatus} from "./enum"
 
-export const apiStart = (): RequestStartAction => ({
+export const apiStart = (loading: LoadingStatus): RequestStartAction => ({
     type: ApiActions.REQUEST_START,
-    payload: undefined
+    payload: loading
 })
 
 export const apiEnd = (): RequestEndAction => ({
@@ -12,9 +12,9 @@ export const apiEnd = (): RequestEndAction => ({
     payload: undefined
 })
 
-export const apiError = (): RequestErrorAction => ({
+export const apiError = (errors: ApiErrors): RequestErrorAction => ({
     type: ApiActions.REQUEST_ERROR,
-    payload: undefined
+    payload: errors
 })
 
 export const login = (): LoginAction => ({
@@ -26,20 +26,4 @@ export const logout = (): LogoutAction => ({
     type: ApiActions.LOGOUT,
     payload: undefined
 })
-
-const apiAction = ({
-    apiEndpoint,
-    data = null,
-    label
-}: ApiActionPayload): ApiAction => ({
-    type: ApiActions.API,
-    payload: {
-      apiEndpoint, 
-      data, 
-      label
-    }
-})
-
-export default apiAction
-
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useDispatch } from "react-redux"
 // import { feedSelector } from "redux/posts/selectors"
-import { feedRequest } from "redux/posts/thunks"
+// import { feedRequest } from "redux/posts/thunks"
 
 const Feed = () => {
 
@@ -9,9 +9,11 @@ const Feed = () => {
 
     const dispatch = useDispatch();
 
+    console.log(dispatch)
+
     useEffect(() => {
-        // if(feed) return;
-        dispatch(feedRequest())
+    //     // if(feed) return;
+    //     dispatch(feedRequest())
     })
 
     return <div>
