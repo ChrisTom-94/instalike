@@ -4,7 +4,7 @@ import React, { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useParams, useResolvedPath } from "react-router-dom";
 import { userProfileIDSelector, userViewSelector } from "redux/user/selectors";
-import { followRequest } from "redux/user/thunks";
+import { followAsync } from "redux/user/thunks";
 
 const UserNavbar = ({
   postsCount,
@@ -22,9 +22,8 @@ const UserNavbar = ({
   const dispatch = useDispatch();
 
   const onClick = useCallback(() => {
-    if (!isFollowedByViewer) dispatch(followRequest(authUserId));
-    else dispatch(followRequest(authUserId));
-  }, [isFollowedByViewer, dispatch, authUserId]);
+    dispatch(followAsync(authUserId));
+  }, [dispatch, authUserId]);
 
   const links = useMemo(
     () => [

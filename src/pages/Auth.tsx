@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { isAuthSelector } from "redux/api/selectors";
-import { getProfileRequest } from "redux/user/thunks";
+import { getProfileAsync } from "redux/user/thunks";
 
 const Auth = () => {
   const isAuth = useSelector(isAuthSelector);
@@ -13,7 +13,7 @@ const Auth = () => {
 
   useEffect(() => {
     if (!isAuth) return;
-    dispatch(getProfileRequest());
+    dispatch(getProfileAsync());
     navigate("/feed");
   }, [isAuth, dispatch, navigate]);
 

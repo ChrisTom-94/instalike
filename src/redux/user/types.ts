@@ -1,13 +1,9 @@
-import { UserErrorStatus, UserLoadingStatus } from './enum';
-
 export type UserState = {
-  data: Instalike.User;
+  user: Instalike.User;
   followSuggestions: Instalike.UserPreview[];
   following: Instalike.UserPreview[];
   notifications: Instalike.Notification[];
-  posts: Instalike.PostFeed,
-  errors: {message: string, type: UserErrorStatus} | null;
-  isLoading: false | UserLoadingStatus;
+  posts: Instalike.PostFeed;
 };
 
 export type UserRequiredFields = Pick<
@@ -18,4 +14,5 @@ export type UserRequiredFields = Pick<
 export type UserUpdatePayload = Omit<
   Partial<Instalike.User>,
   keyof UserRequiredFields
-> & UserRequiredFields;
+> &
+  UserRequiredFields;

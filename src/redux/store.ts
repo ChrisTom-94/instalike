@@ -1,4 +1,3 @@
-import apiMiddleware from 'middlewares/apiMiddleware';
 import apiClient from 'redux/api/api';
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import {
@@ -21,7 +20,6 @@ export const rootReducer = combineReducers({
 });
 
 export const middlewares: Middleware[] = [];
-middlewares.push(apiMiddleware);
 middlewares.push(thunk.withExtraArgument(apiClient));
 
 const initStore = (preloadedState?: RootState) =>

@@ -6,7 +6,7 @@ import {
   countNotificationsToReadSelector,
   notificationsSelector,
 } from "redux/user/selectors";
-import { getNotificationsRequest } from "redux/user/thunks";
+import { getNotificationsAsync } from "redux/user/thunks";
 import BackLink from "components/routes/links/BackLink";
 import NotificationItem from "./NotificationItem";
 import NotificationsButton from "./NotificationButton";
@@ -25,7 +25,7 @@ const Notifications = () => {
 
   useEffect(() => {
     if (notificationsCount !== 0 || !isOpen) return;
-    dispatch(getNotificationsRequest());
+    dispatch(getNotificationsAsync());
   });
 
   return (
