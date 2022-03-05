@@ -1,75 +1,113 @@
 import { Reducer } from "redux";
 import { generateEmptyPostsFeed } from "utils/helpers";
+import { generateEmptyPost } from "../../utils/helpers";
 import {
-  GetFeedRequestAction,
-  GetFeedSuccessAction,
-  GetFeedErrorAction,
-  AddPostRequestAction,
-  AddPostSuccessAction,
-  AddPostErrorAction,
+  GetPostsAction,
+  AddPostAction,
+  UpdatePostAction,
+  DeletePostAction,
+  GetPostCommentsAction,
+  AddPostCommentAction,
+  UpdatePostCommentAction,
+  DeletePostCommentAction,
+  AddPostLikeAction,
+  DeletePostLikeAction,
+  GetFeedAction,
 } from "./actionsType";
 import PostsActions from "./enum";
 import { PostsState } from "./type";
 
 export const postsInitialState: PostsState = {
   feed: generateEmptyPostsFeed(),
-  currentPosts: generateEmptyPostsFeed(),
-  currentPost: null,
-  errors: null,
-  isLoading: false,
+  posts: generateEmptyPostsFeed(),
+  viewedUserPosts: generateEmptyPostsFeed(),
+  currentPost: {
+    post: generateEmptyPost(),
+    likes: [],
+    comments: [],
+  },
 };
 
 export type PostsAction =
-  | GetFeedRequestAction
-  | GetFeedSuccessAction
-  | GetFeedErrorAction
-  | AddPostRequestAction
-  | AddPostSuccessAction
-  | AddPostErrorAction;
+  | GetFeedAction
+  | GetPostsAction
+  | AddPostAction
+  | UpdatePostAction
+  | DeletePostAction
+  | GetPostCommentsAction
+  | AddPostCommentAction
+  | UpdatePostCommentAction
+  | DeletePostCommentAction
+  | AddPostLikeAction
+  | DeletePostLikeAction;
 
 const postsReducer: Reducer<PostsState, PostsAction> = (
   state = postsInitialState,
   action
 ) => {
   switch (action.type) {
-    case PostsActions.GET_FEED_REQUEST:
-      return { ...state, errors: null, isLoading: true };
-
-    case PostsActions.GET_FEED_SUCCESS:
+    case PostsActions.GET_FEED:
       return {
         ...state,
         feed: {
           ...state.feed,
           ...action.payload,
-          items: [
-            ...action.payload.items,
-            ...(state.feed?.items as Instalike.Post[]),
-          ],
+          items: [...state.feed.items, ...action.payload.items],
         },
-        errors: null,
-        isLoading: false,
       };
 
-    case PostsActions.GET_FEED_ERROR:
-      return { ...state, errors: action.error, isLoading: false };
-
-    case PostsActions.ADD_POST_REQUEST:
-      return { ...state, errors: null, isLoading: true };
-
-    case PostsActions.ADD_POST_SUCCESS:
+    case PostsActions.GET_POSTS:
       return {
         ...state,
-        feed: {
-          ...state.feed,
-          count: state.feed.count + 1,
-          items: [action.payload, ...state.feed.items],
+        posts: {
+          ...state.posts,
+          ...action.payload,
+          items: [...state.posts.items, ...action.payload.items],
         },
-        errors: null,
-        isLoading: false,
       };
 
-    case PostsActions.ADD_POST_ERROR:
-      return { ...state, errors: action.errors, isLoading: false };
+    case PostsActions.ADD_POST:
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          items: [...state.posts.items, action.payload],
+        },
+        feed: {
+          ...state.feed,
+          items: [action.payload, ...state.feed.items],
+        },
+      };
+
+    case PostsActions.UPDATE_POST:
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          items: state.posts.items.map((post) =>
+            post.id === action.payload.id ? action.payload : post
+          ),
+        },
+        feed: {
+          ...state.feed,
+          items: state.feed.items.map((post) =>
+            post.id === action.payload.id ? action.payload : post
+          ),
+        },
+      };
+
+    case PostsActions.DELETE_POST:
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          items: state.posts.items.filter((post) => post.id !== action.payload),
+        },
+        feed: {
+          ...state.feed,
+          items: state.feed.items.filter((post) => post.id !== action.payload),
+        },
+      };
 
     default:
       return state;
@@ -77,4 +115,3 @@ const postsReducer: Reducer<PostsState, PostsAction> = (
 };
 
 export default postsReducer;
-

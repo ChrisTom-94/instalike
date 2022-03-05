@@ -11,7 +11,7 @@ const Password = ({
 }: {
   error?: string;
   value: string;
-  onChange: (key: string, value: string) => void;
+  onChange: (key: string, value: EventTarget & HTMLInputElement) => void;
 }) => {
   const [isVisible, toggleIsVisible] = useToggler(false);
 
@@ -29,6 +29,7 @@ const Password = ({
         name="password"
         value={value}
         onChange={onChange}
+        ref={undefined}
       />
       <button
         className="absolute right-3 top-11 z-10"

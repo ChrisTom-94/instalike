@@ -5,9 +5,12 @@ export type PostWithRequired = {
 };
 
 export type PostsState = {
-  feed: Instalike.PostFeed,
-  currentPosts: Instalike.PostFeed,
-  currentPost: Instalike.Post | null,
-  errors: string[] | string | null
-  isLoading: boolean,
+  feed: Instalike.PostFeed;
+  posts: Instalike.PostFeed;
+  viewedUserPosts: Instalike.PostFeed;
+  currentPost: {
+    post: Instalike.Post;
+    comments: Instalike.Comment[];
+    likes: Instalike.Like[];
+  };
 };

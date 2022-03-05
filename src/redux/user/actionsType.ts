@@ -27,6 +27,11 @@ export interface GetFollowSuggestionsAction
   payload: Instalike.User[];
 }
 
+export interface GetFollowersAction
+  extends Action<typeof UserActions.GET_FOLLOWERS> {
+  payload: Instalike.User[];
+}
+
 export interface GetFollowingAction
   extends Action<typeof UserActions.GET_FOLLOWING> {
   payload: Instalike.User[];
@@ -49,5 +54,19 @@ export interface GetNotificationsAction
 
 export interface MarkNotificationAsReadAction
   extends Action<typeof UserActions.MARK_NOTIFICATION_AS_READ> {
+  payload: ApiResourceID;
+}
+export interface GetPostsAction
+  extends Action<typeof UserActions.GET_POSTS> {
+  payload: Instalike.PostFeed;
+}
+
+export interface AddPostAction
+  extends Action<typeof UserActions.ADD_POST> {
+  payload: Instalike.Post;
+}
+
+export interface DeletePostAction
+  extends Action<typeof UserActions.DELETE_POST> {
   payload: ApiResourceID;
 }

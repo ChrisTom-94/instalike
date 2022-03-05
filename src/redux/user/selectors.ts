@@ -5,27 +5,22 @@ export const userSelector = (state: RootState) => state.user;
 
 export const userProfileIDSelector = createSelector(
   [userSelector],
-  (state) => state.user.id
+  (state) => state.profile.id
 );
 
 export const userProfileSelector = createSelector(
   [userSelector],
-  (state) => state.user
-);
-
-export const userPostsCountSelector = createSelector(
-  [userSelector],
-  (state) => state.posts.count
+  (state) => state.profile
 );
 
 export const userProfilePreviewSelector = createSelector(
   [userSelector],
   (state): Instalike.UserPreview => ({
-    resourceType: state.user.resourceType,
-    id: state.user.id,
-    avatar: state.user.avatar,
-    userName: state.user.userName,
-    isViewer: state.user.isViewer,
+    resourceType: state.profile.resourceType,
+    id: state.profile.id,
+    avatar: state.profile.avatar,
+    userName: state.profile.userName,
+    isViewer: state.profile.isViewer,
   })
 );
 
@@ -44,7 +39,17 @@ export const countNotificationsToReadSelector = createSelector(
   (state) => state.notifications.filter((notif) => !notif.isRead).length
 );
 
+export const followingSelector = createSelector(
+  [userSelector],
+  (state) => state.following
+);
+
+export const followersSelector = createSelector(
+  [userSelector],
+  (state) => state.followers
+);
+
 export const userViewSelector = createSelector([userSelector], (state) => ({
-  isFollowedByViewer: state.user.isFollowedByViewer,
-  isViewer: state.user.isViewer,
+  isFollowedByViewer: state.profile.isFollowedByViewer,
+  isViewer: state.profile.isViewer,
 }));

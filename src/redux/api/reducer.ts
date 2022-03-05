@@ -1,3 +1,4 @@
+import { getToken } from "utils/helpers";
 import { Reducer } from "redux";
 import {
   RequestStartAction,
@@ -6,32 +7,36 @@ import {
   LoginAction,
   LogoutAction,
 } from "./actionsType";
-import {ApiActions} from "./enum";
+import { ApiActions } from "./enum";
 import { ApiState } from "./types";
 
 export const ApiInitialState: ApiState = {
-  isAuth: false,
+  isAuth: getToken() !== null,
   isLoading: false,
-  errors: null
+  errors: null,
 };
 
-export type ApiAction = RequestStartAction | RequestEndAction | RequestErrorAction | LoginAction | LogoutAction
+export type ApiAction =
+  | RequestStartAction
+  | RequestEndAction
+  | RequestErrorAction
+  | LoginAction
+  | LogoutAction;
 
 const apiReducer: Reducer<ApiState, ApiAction> = (
   state = ApiInitialState,
   action
 ) => {
   switch (action.type) {
-
     case ApiActions.REQUEST_START:
-      return { ...state, isLoading: action.payload }
+      return { ...state, isLoading: action.payload };
 
     case ApiActions.REQUEST_END:
       return { ...state, isLoading: false };
 
     case ApiActions.REQUEST_ERROR:
       return { ...state, errors: action.payload, isLoading: false };
-    
+
     case ApiActions.LOGIN:
       return { ...state, isAuth: true };
 

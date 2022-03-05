@@ -1,10 +1,10 @@
 import ButtonOutlined from "components/buttons/ButtonOutlined";
 import ToggleFollowButton from "components/buttons/ToggleFollowButton";
-import React, { useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useMemo } from "react";
+import { useSelector } from "react-redux";
 import { Link, NavLink, useParams, useResolvedPath } from "react-router-dom";
-import { userProfileIDSelector, userViewSelector } from "redux/user/selectors";
-import { followAsync } from "redux/user/thunks";
+import { ApiResourceID } from "redux/api/types";
+import { userViewSelector } from "redux/user/selectors";
 
 const UserNavbar = ({
   postsCount,
@@ -15,15 +15,9 @@ const UserNavbar = ({
   followingCount: number;
   followersCount: number;
 }) => {
-  const { username } = useParams();
-  const resolver = useResolvedPath(`/profile/${username}`);
-  const { isFollowedByViewer, isViewer } = useSelector(userViewSelector);
-  const authUserId = useSelector(userProfileIDSelector);
-  const dispatch = useDispatch();
-
-  const onClick = useCallback(() => {
-    dispatch(followAsync(authUserId));
-  }, [dispatch, authUserId]);
+  const { id } = useParams<string>();
+  const resolver = useResolvedPath(`/profile/${id}`);
+  const { isViewer } = useSelector(userViewSelector);
 
   const links = useMemo(
     () => [
@@ -46,10 +40,7 @@ const UserNavbar = ({
           </Link>
         </ButtonOutlined>
       ) : (
-        <ToggleFollowButton
-          isFollowedByViewer={isFollowedByViewer}
-          onClick={onClick}
-        />
+        <ToggleFollowButton userId={id as ApiResourceID} />
       )}
       <div className="flex items-center w-full justify-between">
         {links.map((link) => (

@@ -1,29 +1,34 @@
 import { Reducer } from "redux";
-import { generateEmptyPostsFeed } from "utils/helpers";
 import { UserState } from "./types";
 import {
   GetProfileAction,
   UpdateProfileAction,
+  DeleteAvatarAction,
   GetNotificationsAction,
   MarkNotificationAsReadAction,
   AddFollowingAction,
+  GetFollowingAction,
+  GetFollowersAction,
 } from "./actionsType";
 import UserActions from "./enum";
 
 export const userInitialState: UserState = {
-  user: {} as Instalike.User,
+  profile: {} as Instalike.User,
   followSuggestions: [],
   following: [],
+  followers: [],
   notifications: [],
-  posts: generateEmptyPostsFeed(),
 };
 
 export type UserAction =
   | GetProfileAction
   | UpdateProfileAction
+  | DeleteAvatarAction
   | GetNotificationsAction
   | MarkNotificationAsReadAction
-  | AddFollowingAction;
+  | AddFollowingAction
+  | GetFollowingAction
+  | GetFollowersAction;
 
 const userReducer: Reducer<UserState, UserAction> = (
   state = userInitialState,
@@ -31,10 +36,13 @@ const userReducer: Reducer<UserState, UserAction> = (
 ) => {
   switch (action.type) {
     case UserActions.GET_PROFILE:
-      return { ...state, user: action.payload };
+      return { ...state, profile: action.payload };
 
     case UserActions.UPDATE_PROFILE:
-      return { ...state, user: { ...state.user, ...action.payload } };
+      return { ...state, profile: { ...state.profile, ...action.payload } };
+
+    case UserActions.DELETE_AVATAR:
+      return { ...state, profile: { ...state.profile, avatar: null } };
 
     case UserActions.GET_NOTIFICATIONS:
       return { ...state, notifications: action.payload };
@@ -46,6 +54,12 @@ const userReducer: Reducer<UserState, UserAction> = (
           notif.id === action.payload ? { ...notif, isRead: true } : notif
         ),
       };
+
+    case UserActions.GET_FOLLOWING:
+      return { ...state, following: action.payload };
+
+    case UserActions.GET_FOLLOWERS:
+      return { ...state, followers: action.payload };
 
     case UserActions.ADD_FOLLOWING:
       return {

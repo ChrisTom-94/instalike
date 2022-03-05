@@ -1,24 +1,21 @@
-import { apiError, apiEnd } from "redux/api/actions";
 import type { RootState } from "redux/store";
 import type { Middleware } from "redux";
-import { LoadingStatus } from "redux/api/enum";
-import { apiStart } from "../redux/api/actions";
+import { logout } from "redux/api/actions";
+import { deleteToken } from "utils/helpers";
 
 const apiMiddleware: Middleware<{}, RootState> =
-  ({ dispatch, getState }) =>
+  ({ dispatch }) =>
   (next) =>
   async (action) => {
-    dispatch(apiStart(LoadingStatus.LOADING_USER));
-    try {
-      if (typeof action === "function") {
-        action(dispatch, getState, next);
-      }
-    } catch (e: any) {
-      const { data: errors } = e.response;
-      dispatch(apiError(errors));
-    } finally {
-      dispatch(apiEnd());
+    if (
+      action.payload?.message !== "Unathenticated" &&
+      action.payload?.status !== "error"
+    ) {
+      next(action);
+      return;
     }
+    dispatch(logout());
+    deleteToken();
   };
 
 export default apiMiddleware;

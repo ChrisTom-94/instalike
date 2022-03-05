@@ -10,6 +10,7 @@ import {
   AddFollowingAction,
   DeleteFollowingAction,
   GetFollowSuggestionsAction,
+  GetFollowersAction,
 } from "./actionsType";
 import UserActions from "./enum";
 
@@ -40,16 +41,12 @@ export const getFollowSuggestion = (
   payload: users,
 });
 
-export const getFollowing = (
-  users: Instalike.User[]
-): GetFollowingAction => ({
+export const getFollowing = (users: Instalike.User[]): GetFollowingAction => ({
   type: UserActions.GET_FOLLOWING,
   payload: users,
 });
 
-export const addFollowing = (
-  user: Instalike.User
-): AddFollowingAction => ({
+export const addFollowing = (user: Instalike.User): AddFollowingAction => ({
   type: UserActions.ADD_FOLLOWING,
   payload: user,
 });
@@ -57,6 +54,11 @@ export const addFollowing = (
 export const deleteFollowing = (id: ApiResourceID): DeleteFollowingAction => ({
   type: UserActions.DELETE_FOLLOWING,
   payload: id,
+});
+
+export const getFollowers = (users: Instalike.User[]): GetFollowersAction => ({
+  type: UserActions.GET_FOLLOWERS,
+  payload: users,
 });
 
 export const getNotifications = (

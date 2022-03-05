@@ -1,24 +1,43 @@
 import UserPreview from "components/user/UserPreview";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { markNotificationAsReadRequest } from "redux/user/thunks";
+import {
+  markNotificationAsReadAsync,
+} from "redux/user/thunks";
 import { dateDiff, extractNotificationType } from "utils/helpers";
 
-type NotificationItemType = Omit<Instalike.Notification, 'resourceType'>
+type NotificationItemType = Omit<Instalike.Notification, "resourceType">;
 
-const NotificationItem = ({createdAt, type, isRead, data:{user: {userName, avatar}}, id}: NotificationItemType) => {
-    const dispatch = useDispatch();
+const NotificationItem = ({
+  createdAt,
+  type,
+  isRead,
+  data: {
+    user: { userName, avatar },
+  },
+  id,
+}: NotificationItemType) => {
+  const dispatch = useDispatch();
+ 
+  useEffect(() => {
+    if (isRead) return;
+    dispatch(markNotificationAsReadAsync(id));
+  }, [isRead, id, dispatch]);
 
-    useEffect(() => {
-        if (isRead) return;
-        dispatch(markNotificationAsReadRequest(id));
-    }, [isRead, id, dispatch])
-    
-    return (<div className="flex items-center gap-3">
-        <UserPreview avatar={avatar} userName={userName} />
-        <p className="font-bold text-paradise-pink">{extractNotificationType(type)}</p>
-        <small className="text-acquamarine">{dateDiff(createdAt)} days ago</small>
-    </div>)
-}
+  return (
+    <div className="flex items-center justify-between">
+      <UserPreview
+        avatar={avatar}
+        userName={userName}
+      />
+      <p className="font-bold text-sm text-paradise-pink">
+        {extractNotificationType(type)}
+        <small className="block text-acquamarine text-xs">
+          {dateDiff(createdAt)} days ago
+        </small>
+      </p>
+    </div>
+  );
+};
 
 export default NotificationItem;
