@@ -20,9 +20,9 @@ const UserPosts = () => {
   useEffect(() => {});
 
   return isGrid ? (
-    <PostsGrid onLastAppeared={fetchPosts} posts={posts} />
+    <PostsGrid onLastAppears={fetchPosts} posts={posts} />
   ) : (
-    <PostsList onLastAppeared={fetchPosts} posts={posts} />
+    <PostsList onLastAppears={fetchPosts} posts={posts} />
   );
 };
 

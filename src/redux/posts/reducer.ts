@@ -73,10 +73,6 @@ const postsReducer: Reducer<PostsState, PostsAction> = (
           ...state.posts,
           items: [...state.posts.items, action.payload],
         },
-        feed: {
-          ...state.feed,
-          items: [action.payload, ...state.feed.items],
-        },
       };
 
     case PostsActions.UPDATE_POST:
@@ -85,12 +81,6 @@ const postsReducer: Reducer<PostsState, PostsAction> = (
         posts: {
           ...state.posts,
           items: state.posts.items.map((post) =>
-            post.id === action.payload.id ? action.payload : post
-          ),
-        },
-        feed: {
-          ...state.feed,
-          items: state.feed.items.map((post) =>
             post.id === action.payload.id ? action.payload : post
           ),
         },
@@ -103,9 +93,21 @@ const postsReducer: Reducer<PostsState, PostsAction> = (
           ...state.posts,
           items: state.posts.items.filter((post) => post.id !== action.payload),
         },
-        feed: {
-          ...state.feed,
-          items: state.feed.items.filter((post) => post.id !== action.payload),
+      };
+
+    case PostsActions.ADD_POST_LIKE:
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          items: state.posts.items.map((post) =>
+            post.id === action.payload.postId
+              ? {
+                  ...post,
+                  previewLikes: [...post.previewLikes, action.payload.like],
+                }
+              : post
+          ),
         },
       };
 

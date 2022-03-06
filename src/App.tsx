@@ -10,6 +10,7 @@ import NotFound from "pages/NotFound";
 import User from "pages/user/User";
 import UserFollowing from "pages/user/UserFollowing";
 import UserFollowers from "pages/user/UserFollowers";
+import UserSettings from "pages/user/UserSettings";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route index element={<div>Posts</div>} />
           <Route path="following" element={<UserFollowing />} />
           <Route path="followers" element={<UserFollowers />} />
+          <Route path="edit" element={<UserSettings />} />
         </Route>
         <Route
           path="feed"

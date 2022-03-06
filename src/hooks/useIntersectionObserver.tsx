@@ -14,7 +14,7 @@ const useIntersectionObserver = (
   useEffect(() => {
     const el = ref?.current;
 
-    if (!el || isVisible) return undefined;
+    if (!el) return undefined;
 
     const options = { threshold, root, rootMargin };
     const obsever = new IntersectionObserver(update, options);

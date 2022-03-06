@@ -1,26 +1,22 @@
 import React from "react";
 
-const Input = ({
-  type,
+const Textarea = ({
   name,
   value = undefined,
   onChange,
-  ref = undefined,
   isRequired = false,
   error = undefined,
 }: {
-  type: string;
   name: string;
   value?: string | number | readonly string[] | undefined;
-  ref: React.MutableRefObject<HTMLInputElement> | undefined;
-  onChange: (key: string, target: EventTarget & HTMLInputElement) => void;
+  onChange: (key: string, target: EventTarget & HTMLTextAreaElement) => void;
   isRequired: boolean;
   error: string | undefined;
 }) => (
   <div>
     <label className="flex flex-col gap-2" htmlFor={name}>
       <span className="capitalize font-bold text-acquamarine">{name}</span>
-      <input
+      <textarea
         required={isRequired}
         className="border-gradient rounded-md p-2 focus:outline-none"
         value={value}
@@ -28,16 +24,14 @@ const Input = ({
         onChange={(e) => onChange(name, e.target)}
         id={name}
         name={name}
-        type={type}
-        ref={ref}
       />
     </label>
     {error && <p className="error before:content-['🚫'] mt-3">{error}</p>}
   </div>
 );
 
-Input.defaultProps = {
+Textarea.defaultProps = {
   value: undefined,
 };
 
-export default Input;
+export default Textarea;

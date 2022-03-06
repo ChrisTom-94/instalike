@@ -3,10 +3,10 @@ import PostPreview from "./PostPreview";
 
 const PostsGrid = ({
   posts,
-  onLastAppeared,
+  onLastAppears,
 }: {
   posts: Instalike.PostFeed;
-  onLastAppeared: () => void;
+  onLastAppears: () => void;
 }) => (
   <section className="grid grid-cols-3 gap-1">
     {posts.isEmpty ? (
@@ -15,8 +15,8 @@ const PostsGrid = ({
       posts.items.map((post, i) => (
         <PostPreview
           post={post}
-          isLast={i === posts.count - 1}
-          onAppear={onLastAppeared}
+          isLast={i === posts.items.length - 1}
+          onAppears={onLastAppears}
         />
       ))
     )}

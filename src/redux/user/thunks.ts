@@ -5,6 +5,7 @@ import { apiEnd, apiError, apiStart } from "redux/api/actions";
 import { localStoregeUsersConnected } from "utils/helpers";
 import {
   addFollowing,
+  deleteAvatar,
   deleteFollowing,
   getFollowers,
   getFollowing,
@@ -45,13 +46,27 @@ export const updateProfileAsync =
     }
   };
 
-  export const updateAvatarAsync =
+export const updateAvatarAsync =
   (formData: FormData): AppThunkAction =>
   async (dispatch, _getState, api) => {
     dispatch(apiStart(LoadingStatus.LOADING_USER));
     try {
       const updatedUser = (await api.user.updateAvatar(formData)).data;
       dispatch(updateProfile(updatedUser));
+    } catch (e: any) {
+      const { data: errors } = e.response;
+      dispatch(apiError(errors));
+    } finally {
+      dispatch(apiEnd());
+    }
+  };
+
+export const deleteAvatarAsync =
+  (): AppThunkAction => async (dispatch, _getState, api) => {
+    dispatch(apiStart(LoadingStatus.LOADING_USER));
+    try {
+      await api.user.deleteAvatar();
+      dispatch(deleteAvatar());
     } catch (e: any) {
       const { data: errors } = e.response;
       dispatch(apiError(errors));
@@ -104,12 +119,12 @@ export const followAsync =
     }
   };
 
-  export const unfollowAsync =
+export const unfollowAsync =
   (id: ApiResourceID): AppThunkAction =>
   async (dispatch, _getState, api) => {
     dispatch(apiStart(LoadingStatus.LOADING_NOTIFICATIONS));
     try {
-      await api.user.unfollow(id)
+      await api.user.unfollow(id);
       dispatch(deleteFollowing(id));
     } catch (e: any) {
       const { data: errors } = e.response;

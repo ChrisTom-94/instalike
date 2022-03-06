@@ -9,8 +9,18 @@ export type ApiState = {
   errors: ApiErrors | null;
 };
 
-export type ApiLoginErrors = { email: string; password: string };
+export type ApiUserErrors = {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  biography?: string;
+  userName?: string;
+  password?: string;
+};
 
-export type ApiErrors = { message?: string; errors?: ApiLoginErrors };
+export type ApiErrors = {
+  message?: string;
+  errors?: ApiUserErrors;
+};
 export type ApiCredentials = { email: string; password: string };
 export type ApiResourceID = number | string;

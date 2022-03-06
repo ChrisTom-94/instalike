@@ -1,4 +1,5 @@
 import React from "react";
+import ButtonOutlined from "./buttons/ButtonOutlined";
 
 const Modal = ({
   children,
@@ -7,19 +8,19 @@ const Modal = ({
   children: JSX.Element;
   onClick: () => void;
 }) => (
-  <div className="fixed z-30 inset-0">
-    <div className="absolute h-full w-full bg-gray-200 opacity-50 blur-sm" />
-    <div className="relative z-20 flex flex-col max-w-2xl m-auto">
-      <header className="p-3">
-        <button
-          onClick={onClick}
-          type="button"
-          className="w-fit inline-block ml-auto"
-        >
-          X
-        </button>
-      </header>
-      <div className="m-auto">{children}</div>
+  <div className="fixed z-70 inset-0">
+    <div className="absolute z-60 h-full w-full bg-gray-200 opacity-50 blur-sm" />
+    <div className="absolute z-60 h-full w-full flex-center">
+      <div className="relative flex flex-col max-w-2xl m-auto bg-white p-5 rounded-lg">
+        <header>
+          <ButtonOutlined onClick={onClick} type="button" disabled={false}>
+            <span className="font-bold text-gradient group-hover:reset-text-gradient ">
+              X
+            </span>
+          </ButtonOutlined>
+        </header>
+        <div className="m-auto w-full">{children}</div>
+      </div>
     </div>
   </div>
 );

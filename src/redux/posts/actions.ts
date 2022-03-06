@@ -69,17 +69,25 @@ export const deletePostComment = (
   payload: id,
 });
 
-export const addPostLike = (like: Instalike.Like): AddPostLikeAction => ({
+export const addPostLike = (
+  like: Instalike.Like,
+  postId: ApiResourceID
+): AddPostLikeAction => ({
   type: PostsActions.ADD_POST_LIKE,
-  payload: like,
+  payload: { like, postId },
 });
 
-export const deletePostLike = (id: ApiResourceID): DeletePostLikeAction => ({
+export const deletePostLike = (
+  likeId: ApiResourceID,
+  postId: ApiResourceID
+): DeletePostLikeAction => ({
   type: PostsActions.DELETE_POST_LIKE,
-  payload: id,
+  payload: { likeId, postId },
 });
 
-export const getVievedUserPost = (posts: Instalike.PostFeed): GetViewedUserPostsAction => ({
+export const getVievedUserPost = (
+  posts: Instalike.PostFeed
+): GetViewedUserPostsAction => ({
   type: PostsActions.GET_VIEWED_USER_POSTS,
-  payload: posts
-})
+  payload: posts,
+});

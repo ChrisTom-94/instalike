@@ -19,3 +19,15 @@ export const loginErrorsSelector = createSelector([apiSelector], (state) => ({
   password: state.errors?.errors?.password,
   message: state.errors?.message,
 }));
+
+export const updateUserErrorsSelector = createSelector(
+  [apiSelector],
+  (state) => ({
+    firstNameError: state.errors?.errors?.firstName,
+    lastNameError: state.errors?.errors?.lastName,
+    userNameError: state.errors?.errors?.userName,
+    emailError: state.errors?.errors?.email,
+    biographyError: state.errors?.errors?.biography,
+    message: state.errors?.message,
+  })
+);

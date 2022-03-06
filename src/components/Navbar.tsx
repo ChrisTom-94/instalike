@@ -17,7 +17,7 @@ const Navbar = () => {
     );
   }
   return (
-    <header className="flex items-center justify-between px-5 py-2 fixed inset-x-0 top-0">
+    <header className="flex items-center justify-between px-5 py-2 fixed z-40 bg-white inset-x-0 top-0">
       <span className="font-display font-semibold px-1 text-2xl text-gradient">
         Instalike
       </span>
@@ -27,7 +27,7 @@ const Navbar = () => {
           <PlusIcon />
         </Link>
       </nav>
-      <nav className="fixed z-20 bottom-0 inset-x-0 flex items-center justify-evenly border-t-2 border-paradise-pink p-3">
+      <nav className="fixed z-20 bottom-0 inset-x-0 flex items-center justify-evenly border-t-2 border-paradise-pink bg-white p-3">
         <NavLink to="/search" className="link-hover">
           <SearchIcon />
         </NavLink>

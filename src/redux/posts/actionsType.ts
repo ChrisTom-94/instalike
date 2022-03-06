@@ -44,12 +44,12 @@ export interface DeletePostCommentAction
 
 export interface AddPostLikeAction
   extends Action<typeof PostsActions.ADD_POST_LIKE> {
-  payload: Instalike.Like;
+  payload: { like: Instalike.Like; postId: ApiResourceID };
 }
 
 export interface DeletePostLikeAction
   extends Action<typeof PostsActions.DELETE_POST_LIKE> {
-  payload: ApiResourceID;
+  payload: { likeId: ApiResourceID; postId: ApiResourceID };
 }
 
 export interface GetViewedUserPostsAction

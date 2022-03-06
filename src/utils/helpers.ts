@@ -8,7 +8,14 @@ export const tokenExist = () => localStorage.getItem(API_TOKEN) !== null;
 
 export const dateDiff = (date: string) => {
   const diff = Math.abs(new Date().getTime() - new Date(date).getTime());
-  return new Date(diff).getUTCDate() - 1;
+  const days = new Date(diff).getUTCDate() - 1;
+  if (days > 0) return `${days} day${days === 1 ? "" : "s"}`;
+  const hours = Math.round(diff / 3.6e6);
+  if (hours > 0) return `${hours} hour${hours === 1 ? "" : "s"}`;
+  const minutes = Math.round(diff / 60000);
+  if(minutes > 0) return `${minutes} minutes${minutes === 1 ? "" : "s"}`;
+  return "Less than 1 minutes";
+ 
 };
 
 export const extractNotificationType = (type: string) =>

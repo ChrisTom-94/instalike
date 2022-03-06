@@ -8,8 +8,8 @@ export type UserState = {
 
 export type UserRequiredFields = Pick<
   Instalike.User,
-  "firstName" | "lastName" | "userName" | "email" | "id"
->;
+  "firstName" | "lastName" | "userName" | "email"
+> & { biography?: string };
 
 export type UserUpdatePayload = Omit<
   Partial<Instalike.User>,
