@@ -2,6 +2,7 @@
   "name": "instalike",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://christom-94.github.io/instalike",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
     "@jmetterrothan/instalike": "^1.1.2",
@@ -17,6 +18,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest-dom": "^4.0.1",
     "eslint-plugin-testing-library": "^5.0.4",
+    "gh-pages": "^3.2.3",
     "jest": "^27.4.7",
     "laravel-echo": "^1.11.3",
     "postcss": "^8.4.5",
@@ -58,7 +60,8 @@
     "format": "prettier --write src/**/*.ts{,x}",
     "lint-check": "eslint  src/**/*.ts{,x} --format stylish",
     "ts-check": "tsc --noEmit --skipLibCheck",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "proxy": "http://instalike-api.host/",
   "eslintConfig": {
