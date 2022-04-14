@@ -21,7 +21,7 @@
         "ecmaVersion": "latest",
         "sourceType": "module",
         "project": "./tsconfig.json",
-        "tsconfigRootDir": "D:\\dev\\web\\instalike"
+        "tsconfigRootDir": "D:\\dev\\web\\instalike\\instalike-front"
     },
     "plugins": [
         "react",
