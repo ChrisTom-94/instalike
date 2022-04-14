@@ -2,13 +2,16 @@ import React, { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { ReactComponent as PlusIcon } from "assets/images/plus.svg";
 import { ReactComponent as HomeIcon } from "assets/images/home.svg";
-import { userProfileIDSelector, userProfilePreviewSelector } from "redux/user/selectors";
+import {
+  userProfileIDSelector,
+  userProfilePreviewSelector,
+} from "redux/user/selectors";
 import Notifications from "./notifications/Notifications";
 import UserAvatar from "./user/UserAvatar";
 
 const Navbar = () => {
   const userID = useSelector(userProfileIDSelector);
-  const {avatar} = useSelector(userProfilePreviewSelector);
+  const { avatar } = useSelector(userProfilePreviewSelector);
 
   if (!userID) {
     return (

@@ -1,17 +1,19 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
 
+type UseTogglerType = [boolean, (togglerState?: boolean | null) => void];
 
-type UseTogglerType = [boolean, (togglerState?: boolean | null) => void]
+const useToggler = (initialValue: boolean): UseTogglerType => {
+  const [toggler, setToggler] = useState(initialValue);
 
-const useToggler = (initialValue: boolean) : UseTogglerType => {
-    const [toggler, setToggler] = useState(initialValue);
+  const toggle = useCallback(
+    (togglerState = null): void => {
+      if (togglerState !== undefined) setToggler(togglerState);
+      else setToggler(!toggler);
+    },
+    [toggler]
+  );
 
-    const toggle = useCallback((togglerState = null): void => {
-        if(togglerState !== undefined) setToggler(togglerState) 
-        else setToggler(!toggler)
-    }, [toggler])
-
-    return [toggler, toggle]
-}
+  return [toggler, toggle];
+};
 
 export default useToggler;

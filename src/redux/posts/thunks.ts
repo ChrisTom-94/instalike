@@ -172,7 +172,6 @@ export const deletePostCommentAsync =
     }
   };
 
-
 export const getViewedUserPostsAsync =
   (userId: ApiResourceID): AppThunkAction =>
   async (dispatch, _getState, api) => {

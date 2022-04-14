@@ -13,8 +13,6 @@ const ToggleFollowButton = ({ userId }: { userId: ApiResourceID }) => {
   const isFollowed =
     following.findIndex((f) => f.id === parseInt(userId as string, 10)) >= 0;
 
-  console.log(isFollowed);
-
   const onClick = useCallback(() => {
     if (isFollowed) dispatch(unfollowAsync(userId));
     else dispatch(followAsync(userId));

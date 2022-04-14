@@ -13,7 +13,11 @@ const UserPreviewList = ({
     <div className="flex flex-col gap-2">
       {users.map((user: Instalike.User) => (
         <div key={user.userName} className="flex items-center justify-between">
-          <UserPreview id={user.id} avatar={user.avatar} userName={user.userName} />
+          <UserPreview
+            id={user.id}
+            avatar={user.avatar}
+            userName={user.userName}
+          />
           {button ? { button } : <ToggleFollowButton userId={user.id} />}
         </div>
       ))}
