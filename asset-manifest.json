@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.6525c77c.css",
-    "main.js": "/static/js/main.1a67873f.js",
-    "static/media/home.svg": "/static/media/home.63fb7152d74769d9b0bfef255b61d307.svg",
-    "static/media/eye-slash.svg": "/static/media/eye-slash.118c9de917cecb760adb143d6e0cad2c.svg",
-    "static/media/eye.svg": "/static/media/eye.634ffc7d8657605da6bf7f5c2178c312.svg",
-    "static/media/comments.svg": "/static/media/comments.10805e31bc7c25711e46f83d8b7b4120.svg",
-    "static/media/heart-filled.svg": "/static/media/heart-filled.69085d2e588cd67b61482e4f0990fd07.svg",
-    "static/media/bell.svg": "/static/media/bell.3c6b4e175b2b4499e18bbb6cc07377eb.svg",
-    "static/media/bell-filled.svg": "/static/media/bell-filled.9199043652d5491ccb0a8e29bc881829.svg",
-    "index.html": "/index.html",
-    "static/media/heart.svg": "/static/media/heart.c6345090c3d5bc7f42160d86bed1ae2c.svg",
-    "static/media/arrow.svg": "/static/media/arrow.8a3a30bb8f70a03a4fc19e81bc2c1595.svg",
-    "static/media/plus.svg": "/static/media/plus.576fb31152f229a39583426ade2a302a.svg",
-    "static/media/minus.svg": "/static/media/minus.991e28b2cb5112c907c2a0d115f89fb5.svg",
-    "main.6525c77c.css.map": "/static/css/main.6525c77c.css.map",
-    "main.1a67873f.js.map": "/static/js/main.1a67873f.js.map"
+    "main.css": "/instalike/static/css/main.6525c77c.css",
+    "main.js": "/instalike/static/js/main.2f1b0e0b.js",
+    "static/media/home.svg": "/instalike/static/media/home.63fb7152d74769d9b0bfef255b61d307.svg",
+    "static/media/eye-slash.svg": "/instalike/static/media/eye-slash.118c9de917cecb760adb143d6e0cad2c.svg",
+    "static/media/eye.svg": "/instalike/static/media/eye.634ffc7d8657605da6bf7f5c2178c312.svg",
+    "static/media/comments.svg": "/instalike/static/media/comments.10805e31bc7c25711e46f83d8b7b4120.svg",
+    "static/media/heart-filled.svg": "/instalike/static/media/heart-filled.69085d2e588cd67b61482e4f0990fd07.svg",
+    "static/media/bell.svg": "/instalike/static/media/bell.3c6b4e175b2b4499e18bbb6cc07377eb.svg",
+    "index.html": "/instalike/index.html",
+    "static/media/bell-filled.svg": "/instalike/static/media/bell-filled.9199043652d5491ccb0a8e29bc881829.svg",
+    "static/media/heart.svg": "/instalike/static/media/heart.c6345090c3d5bc7f42160d86bed1ae2c.svg",
+    "static/media/arrow.svg": "/instalike/static/media/arrow.8a3a30bb8f70a03a4fc19e81bc2c1595.svg",
+    "static/media/plus.svg": "/instalike/static/media/plus.576fb31152f229a39583426ade2a302a.svg",
+    "static/media/minus.svg": "/instalike/static/media/minus.991e28b2cb5112c907c2a0d115f89fb5.svg",
+    "main.6525c77c.css.map": "/instalike/static/css/main.6525c77c.css.map",
+    "main.2f1b0e0b.js.map": "/instalike/static/js/main.2f1b0e0b.js.map"
   },
   "entrypoints": [
     "static/css/main.6525c77c.css",
-    "static/js/main.1a67873f.js"
+    "static/js/main.2f1b0e0b.js"
   ]
 }
