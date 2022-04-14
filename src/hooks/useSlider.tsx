@@ -15,11 +15,9 @@ type SliderAction = {
 const sliderReducer = (state: SliderState, action: SliderAction) => {
   switch (action.type) {
     case NEXT:
-      console.log("next");
-      if (state.current === state.length) return { ...state };
+      if (state.current === state.length - 1) return { ...state };
       return { ...state, current: state.current + 1 };
     case PREVIOUS:
-      console.log("previous");
       if (state.current === 0) return { ...state };
       return { ...state, current: state.current - 1 };
     default:

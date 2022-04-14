@@ -9,7 +9,6 @@ import {
   AddPostLikeAction,
   DeletePostLikeAction,
   GetPostsAction,
-  GetPostCommentsAction,
   GetFeedAction,
   GetViewedUserPostsAction,
 } from "./actionsType";
@@ -41,34 +40,6 @@ export const deletePost = (id: ApiResourceID): DeletePostAction => ({
   payload: id,
 });
 
-export const getPostComments = (
-  comments: Instalike.Comment[]
-): GetPostCommentsAction => ({
-  type: PostsActions.GET_POST_COMMENTS,
-  payload: comments,
-});
-
-export const addPostComment = (
-  comment: Instalike.Comment
-): AddPostCommentAction => ({
-  type: PostsActions.ADD_POST_COMMENT,
-  payload: comment,
-});
-
-export const UpdatePostComment = (
-  comment: Instalike.Comment
-): UpdatePostCommentAction => ({
-  type: PostsActions.UPDATE_POST_COMMENT,
-  payload: comment,
-});
-
-export const deletePostComment = (
-  id: ApiResourceID
-): DeletePostCommentAction => ({
-  type: PostsActions.DELETE_POST_COMMENT,
-  payload: id,
-});
-
 export const addPostLike = (
   like: Instalike.Like,
   postId: ApiResourceID
@@ -85,7 +56,31 @@ export const deletePostLike = (
   payload: { likeId, postId },
 });
 
-export const getVievedUserPost = (
+export const addPostComment = (
+  comment: Instalike.Comment,
+  postId: ApiResourceID
+): AddPostCommentAction => ({
+  type: PostsActions.ADD_POST_COMMENT,
+  payload: { comment, postId },
+});
+
+export const updatePostComment = (
+  comment: Instalike.Comment,
+  postId: ApiResourceID
+): UpdatePostCommentAction => ({
+  type: PostsActions.UPDATE_POST_COMMENT,
+  payload: { comment, postId },
+});
+
+export const deletePostComment = (
+  commentId: ApiResourceID,
+  postId: ApiResourceID
+): DeletePostCommentAction => ({
+  type: PostsActions.DELETE_POST_COMMENT,
+  payload: { commentId, postId },
+});
+
+export const getViewedUserPosts = (
   posts: Instalike.PostFeed
 ): GetViewedUserPostsAction => ({
   type: PostsActions.GET_VIEWED_USER_POSTS,

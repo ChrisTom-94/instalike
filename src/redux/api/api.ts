@@ -51,6 +51,12 @@ const apiClient = {
 
     following: () => apiClient.api.get<Instalike.User[]>("/users/me/following"),
 
+    viewedUserfollowers: (id: ApiResourceID) =>
+      apiClient.api.get<Instalike.User[]>(`/users/${id}/followers`),
+
+    viewedUserfollowing: (id: ApiResourceID) =>
+      apiClient.api.get<Instalike.User[]>(`/users/${id}/following`),
+
     follow: (id: ApiResourceID) =>
       apiClient.api.post<Instalike.User>(`/users/me/followers/${id}/follow`),
 
@@ -72,32 +78,45 @@ const apiClient = {
   },
 
   posts: {
+    fetchById: (id: ApiResourceID) =>
+      apiClient.api.get<Instalike.Post>(`/posts/${id}`),
+
     feed: (amount: number, cursor: string) =>
-      apiClient.api.get("/posts", { params: { amount, cursor } }),
+      apiClient.api.get<Instalike.PostFeed>("/posts", {
+        params: { amount, cursor },
+      }),
 
-    create: (post: Instalike.Post) => apiClient.api.post("/posts", post),
+    viewedUserPosts: (id: ApiResourceID) =>
+      apiClient.api.get<Instalike.PostFeed>(`/users/${id}/posts`),
 
-    update: (id: ApiResourceID, data: Instalike.Post) =>
-      apiClient.api.put(`/posts/${id}`, data),
+    create: (post: FormData) =>
+      apiClient.api.post<Instalike.Post>("/posts", post),
 
-    delete: (id: ApiResourceID) => apiClient.api.put(`/posts/${id}`),
+    update: (id: ApiResourceID, post: FormData) =>
+      apiClient.api.put<Instalike.Post>(`/posts/${id}`, post),
+
+    delete: (id: ApiResourceID) => apiClient.api.delete(`/posts/${id}`),
 
     like: (id: ApiResourceID) => apiClient.api.post(`/posts/${id}/like`),
 
     unlike: (id: ApiResourceID) => apiClient.api.delete(`/posts/${id}/like`),
 
-    comments: (id: ApiResourceID) => apiClient.api.get(`/posts/${id}/comments`),
-
-    getComment: (idPost: ApiResourceID, idComment: ApiResourceID) =>
-      apiClient.api.get(`/posts/${idPost}/comments/${idComment}`),
+    addComment: (idPost: ApiResourceID, comment: string) =>
+      apiClient.api.post<Instalike.Comment>(`/posts/${idPost}/comments`, {
+        text: comment,
+      }),
 
     updateComment: (
       idPost: ApiResourceID,
       idComment: ApiResourceID,
       text: string
-    ) => apiClient.api.put(`/posts/${idPost}/comments/${idComment}`, { text }),
+    ) =>
+      apiClient.api.put<Instalike.Comment>(
+        `/posts/${idPost}/comments/${idComment}`,
+        { text }
+      ),
 
-    removeComment: (idPost: ApiResourceID, idComment: ApiResourceID) =>
+    deleteComment: (idPost: ApiResourceID, idComment: ApiResourceID) =>
       apiClient.api.delete(`/posts/${idPost}/comments/${idComment}`),
   },
 };

@@ -49,7 +49,17 @@ export const followersSelector = createSelector(
   (state) => state.followers
 );
 
+export const followSuggestionSelector = createSelector(
+  [userSelector],
+  (state) => state.followSuggestions
+);
+
 export const userViewSelector = createSelector([userSelector], (state) => ({
   isFollowedByViewer: state.profile.isFollowedByViewer,
   isViewer: state.profile.isViewer,
 }));
+
+export const viewedUserSelector = createSelector(
+  [userSelector],
+  (state) => state.viewedUser
+);

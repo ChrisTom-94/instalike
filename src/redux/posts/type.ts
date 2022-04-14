@@ -1,6 +1,6 @@
 export type PostWithRequired = {
   caption: string;
-  hasCommentsDisabled: boolean;
+  resources: Instalike.Media[];
   location: string;
 };
 
@@ -8,9 +8,4 @@ export type PostsState = {
   feed: Instalike.PostFeed;
   posts: Instalike.PostFeed;
   viewedUserPosts: Instalike.PostFeed;
-  currentPost: {
-    post: Instalike.Post;
-    comments: Instalike.Comment[];
-    likes: Instalike.Like[];
-  };
 };

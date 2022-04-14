@@ -41,7 +41,7 @@ const Auth = () => {
   }, [isAuth, dispatch, navigate]);
 
   return (
-    <section className="px-7 py-2 flex flex-col gap-20 mt-12">
+    <section className="px-7 py-2 flex flex-col gap-20 mt-2">
       <article>
         <BackLink onClick={null} />
         <h1 className="title mt-4">Login</h1>
@@ -54,7 +54,11 @@ const Auth = () => {
             <span className="text-4xl">😎</span>
           </h2>
           <div className="py-4 flex items-center justify-between w-full">
-            <UserPreview userName={user.userName} avatar={user.avatar} />
+            <UserPreview
+              id={user.id}
+              userName={user.userName}
+              avatar={user.avatar}
+            />
             <ButtonFilled
               disabled={false}
               type="button"

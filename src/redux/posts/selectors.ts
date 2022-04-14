@@ -17,3 +17,8 @@ export const userPostsCountSelector = createSelector(
   [postsSelector],
   (state) => state.posts.count
 );
+
+export const viewedUserPostsSelector = createSelector(
+  [postsSelector],
+  (state) => state.viewedUserPosts
+);

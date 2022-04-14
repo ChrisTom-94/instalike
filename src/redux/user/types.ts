@@ -4,6 +4,11 @@ export type UserState = {
   following: Instalike.User[];
   followers: Instalike.User[];
   notifications: Instalike.Notification[];
+  viewedUser: {
+    profile: Instalike.User;
+    following: Instalike.User[];
+    followers: Instalike.User[];
+  };
 };
 
 export type UserRequiredFields = Pick<
@@ -19,5 +24,5 @@ export type UserUpdatePayload = Omit<
 
 export type UserPreviewType = Pick<
   Instalike.UserPreview,
-  "userName" | "avatar"
+  "userName" | "avatar" | "id"
 > & { email?: string };

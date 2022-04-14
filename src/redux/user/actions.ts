@@ -11,6 +11,7 @@ import {
   DeleteFollowingAction,
   GetFollowSuggestionsAction,
   GetFollowersAction,
+  GetViewedUserAction,
 } from "./actionsType";
 import UserActions from "./enum";
 
@@ -61,6 +62,13 @@ export const getFollowers = (users: Instalike.User[]): GetFollowersAction => ({
   payload: users,
 });
 
+export const getFollowSuggestions = (
+  users: Instalike.User[]
+): GetFollowSuggestionsAction => ({
+  type: UserActions.GET_FOLLOW_SUGGESTIONS,
+  payload: users,
+});
+
 export const getNotifications = (
   notifications: Instalike.Notification[]
 ): GetNotificationsAction => ({
@@ -73,4 +81,13 @@ export const markNotificationAsRead = (
 ): MarkNotificationAsReadAction => ({
   type: UserActions.MARK_NOTIFICATION_AS_READ,
   payload: id,
+});
+
+export const getViewedUser = (
+  profile: Instalike.User,
+  followers: Instalike.User[],
+  following: Instalike.User[]
+): GetViewedUserAction => ({
+  type: UserActions.GET_VIEWED_USER,
+  payload: { profile, followers, following },
 });

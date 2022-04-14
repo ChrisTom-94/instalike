@@ -1,10 +1,13 @@
 import ButtonOutlined from "components/buttons/ButtonOutlined";
 import ToggleFollowButton from "components/buttons/ToggleFollowButton";
 import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { Link, NavLink, useParams, useResolvedPath } from "react-router-dom";
+import {
+  NavLink,
+  useNavigate,
+  useParams,
+  useResolvedPath,
+} from "react-router-dom";
 import { ApiResourceID } from "redux/api/types";
-import { userViewSelector } from "redux/user/selectors";
 
 const UserNavbar = ({
   postsCount,
@@ -16,8 +19,8 @@ const UserNavbar = ({
   followersCount: number;
 }) => {
   const { id } = useParams<string>();
-  const resolver = useResolvedPath(`/profile/${id}`);
-  const { isViewer } = useSelector(userViewSelector);
+  const resolver = useResolvedPath(`/profile/${id ?? "me"}`);
+  const navigate = useNavigate();
 
   const links = useMemo(
     () => [
@@ -30,14 +33,15 @@ const UserNavbar = ({
 
   return (
     <nav className="flex flex-col gap-4 justify-between p-4">
-      {isViewer ? (
-        <ButtonOutlined type="button" onClick={undefined} disabled={false}>
-          <Link
-            className="text-gradient group-hover:text-white group-hover:reset-text-gradient"
-            to="/profile/me/edit"
-          >
+      {!id ? (
+        <ButtonOutlined
+          type="button"
+          onClick={() => navigate("/profile/me/edit")}
+          disabled={false}
+        >
+          <span className="text-gradient group-hover:text-white group-hover:reset-text-gradient">
             Edit profile
-          </Link>
+          </span>
         </ButtonOutlined>
       ) : (
         <ToggleFollowButton userId={id as ApiResourceID} />

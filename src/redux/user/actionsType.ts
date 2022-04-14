@@ -56,17 +56,12 @@ export interface MarkNotificationAsReadAction
   extends Action<typeof UserActions.MARK_NOTIFICATION_AS_READ> {
   payload: ApiResourceID;
 }
-export interface GetPostsAction
-  extends Action<typeof UserActions.GET_POSTS> {
-  payload: Instalike.PostFeed;
-}
 
-export interface AddPostAction
-  extends Action<typeof UserActions.ADD_POST> {
-  payload: Instalike.Post;
-}
-
-export interface DeletePostAction
-  extends Action<typeof UserActions.DELETE_POST> {
-  payload: ApiResourceID;
+export interface GetViewedUserAction
+  extends Action<typeof UserActions.GET_VIEWED_USER> {
+  payload: {
+    profile: Instalike.User;
+    following: Instalike.User[];
+    followers: Instalike.User[];
+  };
 }

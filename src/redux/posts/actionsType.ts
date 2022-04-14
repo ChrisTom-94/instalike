@@ -22,24 +22,19 @@ export interface DeletePostAction
   payload: ApiResourceID;
 }
 
-export interface GetPostCommentsAction
-  extends Action<typeof PostsActions.GET_POST_COMMENTS> {
-  payload: Instalike.Comment[];
-}
-
 export interface AddPostCommentAction
   extends Action<typeof PostsActions.ADD_POST_COMMENT> {
-  payload: Instalike.Comment;
+  payload: { comment: Instalike.Comment; postId: ApiResourceID };
 }
 
 export interface UpdatePostCommentAction
   extends Action<typeof PostsActions.UPDATE_POST_COMMENT> {
-  payload: Instalike.Comment;
+  payload: { comment: Instalike.Comment; postId: ApiResourceID };
 }
 
 export interface DeletePostCommentAction
   extends Action<typeof PostsActions.DELETE_POST_COMMENT> {
-  payload: ApiResourceID;
+  payload: { commentId: ApiResourceID; postId: ApiResourceID };
 }
 
 export interface AddPostLikeAction

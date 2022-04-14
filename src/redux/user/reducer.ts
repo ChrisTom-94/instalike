@@ -9,6 +9,9 @@ import {
   AddFollowingAction,
   GetFollowingAction,
   GetFollowersAction,
+  DeleteFollowingAction,
+  GetViewedUserAction,
+  GetFollowSuggestionsAction,
 } from "./actionsType";
 import UserActions from "./enum";
 
@@ -18,6 +21,11 @@ export const userInitialState: UserState = {
   following: [],
   followers: [],
   notifications: [],
+  viewedUser: {
+    profile: {} as Instalike.User,
+    following: [],
+    followers: [],
+  },
 };
 
 export type UserAction =
@@ -28,7 +36,11 @@ export type UserAction =
   | MarkNotificationAsReadAction
   | AddFollowingAction
   | GetFollowingAction
-  | GetFollowersAction;
+  | GetFollowersAction
+  | GetFollowSuggestionsAction
+  | AddFollowingAction
+  | DeleteFollowingAction
+  | GetViewedUserAction;
 
 const userReducer: Reducer<UserState, UserAction> = (
   state = userInitialState,
@@ -61,10 +73,33 @@ const userReducer: Reducer<UserState, UserAction> = (
     case UserActions.GET_FOLLOWERS:
       return { ...state, followers: action.payload };
 
+    case UserActions.GET_FOLLOW_SUGGESTIONS:
+      return { ...state, followSuggestions: action.payload };
+
     case UserActions.ADD_FOLLOWING:
       return {
         ...state,
+        profile: {
+          ...state.profile,
+          followingCount: state.profile.followingCount + 1,
+        },
         following: [...state.following, action.payload],
+      };
+
+    case UserActions.DELETE_FOLLOWING:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          followingCount: state.profile.followingCount - 1,
+        },
+        following: state.following.filter((f) => f.id !== action.payload),
+      };
+
+    case UserActions.GET_VIEWED_USER:
+      return {
+        ...state,
+        viewedUser: action.payload,
       };
 
     default:

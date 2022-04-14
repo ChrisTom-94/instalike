@@ -2,8 +2,12 @@ import React from "react";
 import { ReactComponent as Bell } from "assets/images/bell.svg";
 import { ReactComponent as BellFilled } from "assets/images/bell-filled.svg";
 
-const NotificationsButton = ({notificationsToReadCount, onClick} : {notificationsToReadCount: number,
-  onClick: () => void
+const NotificationsButton = ({
+  notificationsToReadCount,
+  onClick,
+}: {
+  notificationsToReadCount: number;
+  onClick: () => void;
 }) => (
   <button onClick={onClick} type="button">
     {notificationsToReadCount > 0 ? <BellFilled /> : <Bell />}

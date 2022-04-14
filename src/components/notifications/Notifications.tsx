@@ -37,7 +37,7 @@ const Notifications = () => {
         onClick={onClick}
       />
       {isOpen && (
-        <div className="fixed inset-0 z-40 bg-white flex flex-col p-4">
+        <div className="fixed inset-0 z-40 bg-white flex flex-col p-4 lg:absolute lg:inset-auto lg:top-0 lg:right-0 lg:w-96 lg:border-2 lg:border-paradise-pink">
           <BackLink onClick={onClick} />
           <h2 className="subtitle mt-4 mb-10">Notifications</h2>
           <div className="flex flex-col gap-3">

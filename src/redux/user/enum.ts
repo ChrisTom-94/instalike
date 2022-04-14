@@ -13,6 +13,7 @@ enum UserActions {
   GET_POSTS = "GET_POSTS",
   ADD_POST = "ADD_POST",
   DELETE_POST = "DELETE_POST",
+  GET_VIEWED_USER = "GET_VIEWED_USER",
 }
 
 export default UserActions;

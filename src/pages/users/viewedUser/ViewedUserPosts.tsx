@@ -1,29 +1,28 @@
 import PostsGrid from "components/posts/PostsGrid";
 import PostsList from "components/posts/PostsList";
 import useToggler from "hooks/useToggler";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userPostsSelector } from "redux/posts/selectors";
+import { viewedUserPostsSelector } from "redux/posts/selectors";
 import { getPostsAsync } from "redux/posts/thunks";
 
-const UserPosts = () => {
+const ViewedUserPosts = () => {
   const dispatch = useDispatch();
-  const posts = useSelector(userPostsSelector);
+  const posts = useSelector(viewedUserPostsSelector);
   const [isGrid] = useToggler(true);
 
   const fetchPosts = useCallback(() => {
+    if (!posts.hasMorePages) return;
     const amount = isGrid ? 10 : 5;
     const cursor = posts.nextCursor ? posts.nextCursor : posts.cursor;
     dispatch(getPostsAsync(amount, cursor ?? ""));
   }, [dispatch, isGrid, posts]);
 
-  useEffect(() => {});
-
   return isGrid ? (
-    <PostsGrid onLastAppears={fetchPosts} posts={posts} />
+    <PostsGrid posts={posts} />
   ) : (
     <PostsList onLastAppears={fetchPosts} posts={posts} />
   );
 };
 
-export default UserPosts;
+export default ViewedUserPosts;

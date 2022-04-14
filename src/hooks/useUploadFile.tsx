@@ -1,7 +1,10 @@
 import React, { useCallback, useRef, useState } from "react";
 import Input from "../components/forms/Input";
 
-const useUploadFile = (error: string | undefined = undefined) => {
+const useUploadFile = (
+  error: string | undefined = undefined,
+  name: string = "resource"
+) => {
   const [preview, setPreview] = useState<string>(null!);
   const [file, setFile] = useState<File>(null!);
   const currentError = useRef<undefined | string>(error);
@@ -14,7 +17,6 @@ const useUploadFile = (error: string | undefined = undefined) => {
         return;
       }
       const Mb = Math.round(tempFile.size / 1024 / 1024);
-      console.log(Mb);
       if (Mb > 10) {
         currentError.current =
           "Your pic is too heavy, please select one less bigger !";
@@ -34,7 +36,7 @@ const useUploadFile = (error: string | undefined = undefined) => {
       isRequired
       value={undefined}
       type="file"
-      name="resource"
+      name={name}
       onChange={onChange}
     />
   );

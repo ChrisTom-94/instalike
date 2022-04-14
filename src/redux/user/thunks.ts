@@ -9,8 +9,10 @@ import {
   deleteFollowing,
   getFollowers,
   getFollowing,
+  getFollowSuggestions,
   getNotifications,
   getProfile,
+  getViewedUser,
   markNotificationAsRead,
   updateProfile,
 } from "./actions";
@@ -154,6 +156,37 @@ export const getFollowersAsync =
     try {
       const followers = (await api.user.followers()).data;
       dispatch(getFollowers(followers));
+    } catch (e: any) {
+      const { data: errors } = e.response;
+      dispatch(apiError(errors));
+    } finally {
+      dispatch(apiEnd());
+    }
+  };
+
+export const getFollowSuggestionsAsync =
+  (): AppThunkAction => async (dispatch, _getState, api) => {
+    dispatch(apiStart(LoadingStatus.LOADING_USER));
+    try {
+      const followSuggestions = (await api.user.followSuggestions(10)).data;
+      dispatch(getFollowSuggestions(followSuggestions));
+    } catch (e: any) {
+      const { data: errors } = e.response;
+      dispatch(apiError(errors));
+    } finally {
+      dispatch(apiEnd());
+    }
+  };
+
+export const getViewedUserAsync =
+  (id: ApiResourceID): AppThunkAction =>
+  async (dispatch, _getState, api) => {
+    dispatch(apiStart(LoadingStatus.LOADING_USER));
+    try {
+      const profile = (await api.user.fetchById(id)).data;
+      const followers = (await api.user.viewedUserfollowers(id)).data;
+      const following = (await api.user.viewedUserfollowing(id)).data;
+      dispatch(getViewedUser(profile, followers, following));
     } catch (e: any) {
       const { data: errors } = e.response;
       dispatch(apiError(errors));

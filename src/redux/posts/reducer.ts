@@ -1,18 +1,17 @@
 import { Reducer } from "redux";
 import { generateEmptyPostsFeed } from "utils/helpers";
-import { generateEmptyPost } from "../../utils/helpers";
 import {
   GetPostsAction,
   AddPostAction,
   UpdatePostAction,
   DeletePostAction,
-  GetPostCommentsAction,
   AddPostCommentAction,
   UpdatePostCommentAction,
   DeletePostCommentAction,
   AddPostLikeAction,
   DeletePostLikeAction,
   GetFeedAction,
+  GetViewedUserPostsAction,
 } from "./actionsType";
 import PostsActions from "./enum";
 import { PostsState } from "./type";
@@ -21,11 +20,6 @@ export const postsInitialState: PostsState = {
   feed: generateEmptyPostsFeed(),
   posts: generateEmptyPostsFeed(),
   viewedUserPosts: generateEmptyPostsFeed(),
-  currentPost: {
-    post: generateEmptyPost(),
-    likes: [],
-    comments: [],
-  },
 };
 
 export type PostsAction =
@@ -34,12 +28,12 @@ export type PostsAction =
   | AddPostAction
   | UpdatePostAction
   | DeletePostAction
-  | GetPostCommentsAction
   | AddPostCommentAction
   | UpdatePostCommentAction
   | DeletePostCommentAction
   | AddPostLikeAction
-  | DeletePostLikeAction;
+  | DeletePostLikeAction
+  | GetViewedUserPostsAction;
 
 const postsReducer: Reducer<PostsState, PostsAction> = (
   state = postsInitialState,
@@ -105,10 +99,75 @@ const postsReducer: Reducer<PostsState, PostsAction> = (
               ? {
                   ...post,
                   previewLikes: [...post.previewLikes, action.payload.like],
+                  likesCount: post.likesCount + 1,
                 }
               : post
           ),
         },
+      };
+
+    case PostsActions.DELETE_POST_LIKE:
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          items: state.posts.items.map((post) =>
+            post.id === action.payload.postId
+              ? {
+                  ...post,
+                  previewLikes: post.previewLikes.filter(
+                    (like) => like.id !== action.payload.likeId
+                  ),
+                  likesCount: post.likesCount - 1,
+                }
+              : post
+          ),
+        },
+      };
+
+    case PostsActions.ADD_POST_COMMENT:
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          items: state.posts.items.map((post) =>
+            post.id === action.payload.postId
+              ? {
+                  ...post,
+                  previewComments: [
+                    ...post.previewComments,
+                    action.payload.comment,
+                  ],
+                  commentsCount: post.commentsCount + 1,
+                }
+              : post
+          ),
+        },
+      };
+
+    case PostsActions.DELETE_POST_COMMENT:
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          items: state.posts.items.map((post) =>
+            post.id === action.payload.postId
+              ? {
+                  ...post,
+                  previewComments: post.previewComments.filter(
+                    (like) => like.id !== action.payload.commentId
+                  ),
+                  commentsCount: post.commentsCount - 1,
+                }
+              : post
+          ),
+        },
+      };
+
+    case PostsActions.GET_VIEWED_USER_POSTS:
+      return {
+        ...state,
+        viewedUserPosts: action.payload,
       };
 
     default:

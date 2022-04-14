@@ -9,16 +9,19 @@ import {
   loginErrorsSelector,
 } from "redux/api/selectors";
 import { loginAsync } from "redux/api/thunks";
+import { useLocation } from "react-router-dom";
 
 const LoginForm = ({ prefilledEmail }: { prefilledEmail: string }) => {
   const isLoading = useSelector(isLoadingUserSelector);
   const { email, password, message } = useSelector(loginErrorsSelector);
+  const { state } = useLocation();
+  const dispatch = useDispatch();
   const [credentials, setCredentials] = useState<ApiCredentials>({
     email: prefilledEmail,
     password: "",
   });
 
-  const dispatch = useDispatch();
+  const redirectError = state as { message?: string };
 
   const change = useCallback(
     (key: string, target: EventTarget & HTMLInputElement) => {
@@ -40,9 +43,11 @@ const LoginForm = ({ prefilledEmail }: { prefilledEmail: string }) => {
 
   return (
     <form className="flex flex-col gap-4" onSubmit={submit}>
-      {message && <p className="error before:content-['⛔']">{message}</p>}
+      {!redirectError && message && (
+        <p className="error before:content-['⛔']">{message}</p>
+      )}
       <Input
-        error={email}
+        error={!redirectError ? email : undefined}
         isRequired
         type="email"
         name="email"
@@ -52,7 +57,7 @@ const LoginForm = ({ prefilledEmail }: { prefilledEmail: string }) => {
       />
       <Password
         value={credentials.password}
-        error={password}
+        error={!redirectError ? password : undefined}
         onChange={change}
       />
       <Submit disabled={isLoading} text="Login" />

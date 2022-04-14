@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { followersSelector } from "redux/user/selectors";
 import { getFollowersAsync } from "redux/user/thunks";
 
-const UserFollowing = () => {
+const UserFollowers = () => {
   const followers = useSelector(followersSelector);
   const dispatch = useDispatch();
 
@@ -15,4 +15,4 @@ const UserFollowing = () => {
   return <UserPreviewList users={followers} />;
 };
 
-export default UserFollowing;
+export default UserFollowers;

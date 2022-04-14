@@ -13,9 +13,8 @@ export const dateDiff = (date: string) => {
   const hours = Math.round(diff / 3.6e6);
   if (hours > 0) return `${hours} hour${hours === 1 ? "" : "s"}`;
   const minutes = Math.round(diff / 60000);
-  if(minutes > 0) return `${minutes} minutes${minutes === 1 ? "" : "s"}`;
-  return "Less than 1 minutes";
- 
+  if (minutes > 0) return `${minutes} minute${minutes === 1 ? "" : "s"}`;
+  return "Pretty now";
 };
 
 export const extractNotificationType = (type: string) =>

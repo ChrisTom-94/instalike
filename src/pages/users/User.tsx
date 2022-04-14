@@ -11,7 +11,7 @@ import useToggler from "hooks/useToggler";
 import Modal from "components/Modal";
 import AvatarForm from "forms/AvatarForm";
 
-const Profile = () => {
+const User = () => {
   const user = useSelector(userProfileSelector);
   const userPostsCount = useSelector(userPostsCountSelector);
   const [isOpen, toggleIsOpen] = useToggler(false);
@@ -22,7 +22,7 @@ const Profile = () => {
   );
 
   return (
-    <section className="p-4 mt-12">
+    <section className="p-4 mt-12 h-full bg-white">
       <div className="grid grid-cols-3 gap-3">
         <div className="w-24 place-self-center relative z-10">
           <UserAvatar className="border-2" avatar={user.avatar} />
@@ -52,4 +52,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default User;

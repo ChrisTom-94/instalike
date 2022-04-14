@@ -14,6 +14,16 @@ export const isLoadingUserSelector = createSelector(
   (state) => state.isLoading === LoadingStatus.LOADING_USER
 );
 
+export const isLoadingPostSelector = createSelector(
+  [apiSelector],
+  (state) => state.isLoading === LoadingStatus.LOADING_POSTS
+);
+
+export const isLoadingCommentSelector = createSelector(
+  [apiSelector],
+  (state) => state.isLoading === LoadingStatus.LOADING_COMMENTS
+);
+
 export const loginErrorsSelector = createSelector([apiSelector], (state) => ({
   email: state.errors?.errors?.email,
   password: state.errors?.errors?.password,
@@ -31,3 +41,15 @@ export const updateUserErrorsSelector = createSelector(
     message: state.errors?.message,
   })
 );
+
+export const postErrorsSelector = createSelector([apiSelector], (state) => ({
+  resources: state.errors?.errors?.resources,
+  caption: state.errors?.errors?.caption,
+  location: state.errors?.errors?.location,
+  message: state.errors?.message,
+}));
+
+export const commentErrorsSelector = createSelector([apiSelector], (state) => ({
+  text: state.errors?.errors?.text,
+  message: state.errors?.message,
+}));
